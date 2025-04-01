@@ -4,7 +4,7 @@ from scipy.fft import fft
 import matplotlib.pyplot as plt
 
 # Load the WAV file
-file_path = 'rpw.wav'  # Replace with your file path
+file_path = r'C:\Users\john\Desktop\WEEVIL DATA\Eavesdropping-Mankin\rpw.wav'  # Replace with your file path
 sample_rate, data = wavfile.read(file_path)
 
 # Convert stereo to mono if needed
