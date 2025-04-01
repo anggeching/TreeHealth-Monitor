@@ -1,19 +1,21 @@
 from wav_inspector import WavInspector
 
-# Specify the folder containing WAV files
+# Define the folder containing WAV files (Update this path)
 folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 2 - APR1\test1 - Accelerometer only small probe"
 
-from wav_inspector import WavInspector
-
-# Path to merged file
-merged_file = "merged_weevil_data.wav"
+# Define output merged file
+merged_output = "merged_weevil_data.wav"
 
 # Create an instance of WavInspector
 inspector = WavInspector()
 
-# Load the merged WAV file
+# Step 1: Merge all WAV files in the folder
+merged_file = inspector.merge_wav_folder(folder_path, output_file=merged_output)
+print(f"Merged file created: {merged_file}")
+
+# Step 2: Load the merged WAV file
 inspector.load_wav(merged_file)
+print("Merged WAV file loaded successfully.")
 
-# Plot the waveform
+# Step 3: Plot the waveform
 inspector.plot_waveform()
-
