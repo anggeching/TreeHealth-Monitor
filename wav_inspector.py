@@ -1,9 +1,11 @@
-# wav_inspector.py
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 import scipy.signal as signal
 from pydub import AudioSegment
+import os
+
+AudioSegment.converter = r"C:\ffmpeg\bin\ffmpeg.exe" 
 
 class WavInspector:
     def __init__(self, file_path=None):
@@ -12,27 +14,35 @@ class WavInspector:
         self.data = None
         self.time = None
 
-        if file_path:
-            self.load_wav(file_path)
+    def merge_wav_folder(self, folder_path, output_file="merged_output.wav"):
+            """
+            Merges all WAV files in a given folder into one continuous WAV file.
 
-    def merge_wav_files(self, wav_files, output_file="merged_output.wav"):
-        """
-        Merges multiple WAV files into one continuous file.
+            Parameters:
+                folder_path (str): Path to the folder containing WAV files.
+                output_file (str): Name of the output merged file.
 
-        Parameters:
-            wav_files (list): List of WAV file paths to merge.
-            output_file (str): Name of the output merged file.
+            Returns:
+                str: Path of the merged file.
+            """
+            # Get all .wav files from the folder and sort them alphabetically
+            wav_files = sorted([
+                os.path.join(folder_path, f) 
+                for f in os.listdir(folder_path) 
+                if f.lower().endswith(".wav")
+            ])
 
-        Returns:
-            str: Path of the merged file.
-        """
-        combined = AudioSegment.empty()
-        for file in wav_files:
-            audio = AudioSegment.from_wav(file)
-            combined += audio  # Append each file
+            if not wav_files:
+                raise FileNotFoundError("No WAV files found in the specified folder.")
 
-        combined.export(output_file, format="wav")
-        return output_file
+            combined = AudioSegment.empty()
+
+            for file in wav_files:
+                audio = AudioSegment.from_wav(file)
+                combined += audio  # Append each file
+
+            combined.export(output_file, format="wav")
+            return output_file
 
     def load_wav(self, file_path):
         """
