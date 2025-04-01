@@ -29,3 +29,4 @@ plt.ylabel("Amplitude")
 plt.title("Figure 1: Waveform (Time vs Amplitude)")
 plt.grid()
 plt.show()
+    
