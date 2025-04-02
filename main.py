@@ -1,7 +1,7 @@
 from wav_inspector import WavInspector
 
 # Define the folder containing WAV files (Update this path)
-folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 4 - APR2\Test 4 - Kusina Angel at loob box -infested"
+folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 4 - APR2\Test 5 - Coupling Lang"
 
 # Define output merged file
 merged_output = "kusina ouside box - qiet.wav"
