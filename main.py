@@ -1,10 +1,10 @@
 from wav_inspector import WavInspector
 
 # Define the folder containing WAV files (Update this path)
-folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 2 - APR1\test1 - Accelerometer only small probe"
+folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 4 - APR2\Test 4 - Kusina Angel at loob box -infested"
 
 # Define output merged file
-merged_output = "merged_weevil_data.wav"
+merged_output = "kusina ouside box - qiet.wav"
 
 # Create an instance of WavInspector
 inspector = WavInspector()
