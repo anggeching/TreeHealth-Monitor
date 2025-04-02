@@ -79,7 +79,7 @@ class WavInspector:
 
         # Set fixed x-axis limit (e.g., first 15 seconds)
         plt.xlim(0, 2)
-        plt.ylim(0, 1)
+        plt.ylim(, 1)
 
         # Set fixed y-axis limit (e.g., amplitude between -1 and 1)
         #plt.ylim(0, 1)
