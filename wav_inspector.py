@@ -78,9 +78,35 @@ class WavInspector:
         plt.grid()
 
         # Set fixed x-axis limit (e.g., first 15 seconds)
-        plt.xlim(0, 2)
-        plt.ylim(, 1)
+        plt.xlim(0, 1)
+        plt.ylim(-1.5, 1)
 
         # Set fixed y-axis limit (e.g., amplitude between -1 and 1)
         #plt.ylim(0, 1)
         plt.show()
+    
+    def export_amplitude_per_second(self, output_txt="amplitude_per_second.txt"):
+        """
+        Computes and saves the average absolute amplitude per second to a text file.
+
+        Parameters:
+            output_txt (str): Path to the output text file.
+        """
+        if self.data is None or self.sample_rate is None:
+            raise ValueError("No WAV file loaded. Call load_wav() first.")
+
+        total_seconds = int(len(self.data) / self.sample_rate)
+        amplitudes = []
+
+        for second in range(total_seconds):
+            start = second * self.sample_rate
+            end = start + self.sample_rate
+            segment = self.data[start:end]
+            avg_amplitude = np.mean(segment)
+            amplitudes.append(avg_amplitude)
+
+        with open(output_txt, "w") as f:
+            for sec, amp in enumerate(amplitudes):
+                f.write(f"{sec:04d}s: {amp:.6f}\n")
+
+        print(f"Amplitude per second saved to {output_txt}")

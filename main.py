@@ -1,21 +1,24 @@
 from wav_inspector import WavInspector
 
-# Define the folder containing WAV files (Update this path)
-folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 4 - APR2\Test 5 - Coupling Lang"
+# Define the folder containing WAV files
+folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 5 - APR5\Test 1\Infested"
 
-# Define output merged file
+# Define output merged file name
 merged_output = "kusina ouside box - qiet.wav"
 
-# Create an instance of WavInspector
+# Create instance
 inspector = WavInspector()
 
-# Step 1: Merge all WAV files in the folder
+# Merge WAV files
 merged_file = inspector.merge_wav_folder(folder_path, output_file=merged_output)
 print(f"Merged file created: {merged_file}")
 
-# Step 2: Load the merged WAV file
+# Load merged WAV file
 inspector.load_wav(merged_file)
 print("Merged WAV file loaded successfully.")
 
-# Step 3: Plot the waveform
+# Export amplitude per second
+inspector.export_amplitude_per_second(r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 5 - APR5\Test 1\Infested_Amplitude.txt")
+
+# Plot waveform
 inspector.plot_waveform()
