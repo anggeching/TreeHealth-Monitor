@@ -110,3 +110,40 @@ class WavInspector:
                 f.write(f"{sec:04d}s: {amp:.6f}\n")
 
         print(f"Amplitude per second saved to {output_txt}")
+    
+    def classify_infestation(self, std_threshold=0.01, delta_threshold=0.05):
+        """
+        Classifies whether the WAV is infested or not using a threshold-based rule.
+
+        Parameters:
+            std_threshold (float): Threshold for standard deviation of amplitude.
+            delta_threshold (float): Threshold for maximum amplitude change per second.
+
+        Returns:
+            str: "INFESTED" or "NOT INFESTED"
+        """
+        if self.data is None or self.sample_rate is None:
+            raise ValueError("No WAV file loaded. Call load_wav() first.")
+
+        total_seconds = int(len(self.data) / self.sample_rate)
+        per_second_averages = []
+
+        for second in range(total_seconds):
+            start = second * self.sample_rate
+            end = start + self.sample_rate
+            segment = self.data[start:end]
+            avg = np.mean(segment)
+            per_second_averages.append(avg)
+
+        std_dev = np.std(per_second_averages)
+        max_delta = np.max(np.abs(np.diff(per_second_averages)))
+
+        print(f"STD of per-second average: {std_dev:.6f}")
+        print(f"Max delta between seconds: {max_delta:.6f}")
+
+        if std_dev > std_threshold or max_delta > delta_threshold:
+            print("Classification: INFESTED")
+            return "INFESTED"
+        else:
+            print("Classification: NOT INFESTED")
+            return "NOT INFESTED"
