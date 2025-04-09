@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import wave
 import os
 import json
+import time
 
 class WavInspector:
     def __init__(self, file_path=None):
@@ -83,11 +84,15 @@ class WavInspector:
 
     def plot_waveform(self):
         """
-        Plots the waveform (Time vs. Amplitude).
+        Plots the waveform (Time vs. Amplitude) and closes the figure after 10 seconds.
         """
         if self.data is None:
             raise ValueError("No WAV file loaded. Call load_wav() first.")
 
+        # Initialize interactive mode
+        plt.ion()
+
+        # Plot the waveform
         plt.figure(figsize=(12, 4))
         plt.plot(self.time, self.data, color='black')
         plt.xlabel("Time (s)")
@@ -99,9 +104,14 @@ class WavInspector:
         plt.xlim(0, 1)
         plt.ylim(-1.5, 1)
 
-        # Set fixed y-axis limit (e.g., amplitude between -1 and 1)
-        #plt.ylim(0, 1)
+        # Show the plot
         plt.show()
+
+        # Pause for 10 seconds before closing the plot
+        plt.pause(5)
+
+        # Close the plot window after 10 seconds
+        plt.close()
     
     def export_amplitude_per_second(self, output_txt="amplitude_per_second.txt"):
         """
@@ -183,26 +193,33 @@ if __name__ == '__main__':
     # Define output directory and filename
     output_dir = r"C:\Users\john\Desktop\WEEVIL DATA\TEST"
     os.makedirs(output_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%d-%b-%Y_%I-%M-%S%p")
-    merged_output = f"TIBOK NG UOD_{timestamp}.wav"
-    filepath = os.path.join(output_dir, merged_output)
 
-    # Merge WAV files
-    merged_file = inspector.merge_wav_folder(folder_path, output_file=filepath)
-    print(f"Merged file created: {merged_file}")
+    while True:
+        # Generate a timestamp and filename for the merged WAV file
+        timestamp = datetime.now().strftime("%d-%b-%Y_%I-%M-%S%p")
+        merged_output = f"TIBOK NG UOD_{timestamp}.wav"
+        filepath = os.path.join(output_dir, merged_output)
 
-    # Load and analyze WAV
-    inspector.load_wav(merged_file)
-    print("Merged WAV file loaded successfully.")
+        # Merge WAV files
+        merged_file = inspector.merge_wav_folder(folder_path, output_file=filepath)
+        print(f"Merged file created: {merged_file}")
 
-    # Export amplitude per second
-    inspector.export_amplitude_per_second(
-        r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 5 - APR5\Test 1\Infested_Amplitude.txt"
-    )
+        # Load and analyze the merged WAV file
+        inspector.load_wav(merged_file)
+        print("Merged WAV file loaded successfully.")
 
-    # Plot waveform
-    inspector.plot_waveform()
+        # Export amplitude per second
+        inspector.export_amplitude_per_second(
+            r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 5 - APR5\Test 1\Infested_Amplitude.txt"
+        )
 
-    # Classify infestation
-    classification = inspector.classify_infestation()
-    print(f"Result: {classification}")
+        # Plot waveform
+        inspector.plot_waveform()
+
+        # Classify infestation
+        classification = inspector.classify_infestation()
+        print(f"Result: {classification}")
+
+        # Sleep for 60 seconds before running again
+        print("Waiting for the next cycle...")
+        time.sleep(30)
