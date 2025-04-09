@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree Vibration Inspection</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .dashboard-container {
@@ -15,14 +15,39 @@
             border-radius: 5px;
             padding: 15px;
             margin-bottom: 20px;
+            background-color: #fff; /* Default light mode background */
+            color: #212529; /* Default light mode text color */
         }
         .chart-container {
             margin-bottom: 20px;
+        }
+        body {
+            background-color: #f8f9fa; /* Default light mode body background */
+            color: #212529; /* Default light mode body text color */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-toggle-mode {
+            margin-bottom: 15px;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .data-card.dark-mode {
+            background-color: #495057;
+            border-color: #6c757d;
+            color: #f8f9fa;
         }
     </style>
 </head>
 <body>
     <div class="container dashboard-container">
+        <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-outline-dark btn-sm btn-toggle-mode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </div>
+
         <h1 class="mb-4">Tree Vibration Inspection Dashboard</h1>
 
         <div class="row">
@@ -61,6 +86,40 @@
     </div>
 
     <script>
+        // Get references to elements we'll need to toggle
+        const body = document.body;
+        const dataCards = document.querySelectorAll('.data-card');
+        const bootstrapCSS = document.getElementById('bootstrap-css');
+
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            dataCards.forEach(card => card.classList.add('dark-mode'));
+            // Consider swapping to a dark mode Bootstrap theme if you have one
+            // bootstrapCSS.href = 'path/to/bootstrap-dark.min.css';
+            localStorage.setItem('theme', 'dark');
+        }
+
+        function enableLightMode() {
+            body.classList.remove('dark-mode');
+            dataCards.forEach(card => card.classList.remove('dark-mode'));
+            bootstrapCSS.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css';
+            localStorage.setItem('theme', 'light');
+        }
+
+        function toggleDarkMode() {
+            if (body.classList.contains('dark-mode')) {
+                enableLightMode();
+            } else {
+                enableDarkMode();
+            }
+        }
+
+        // Check for saved theme preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            enableDarkMode();
+        }
+
         // Not Infected Data
         const notInfectedRawData = `
 0000s: -0.961342
