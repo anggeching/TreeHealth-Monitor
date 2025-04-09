@@ -9,7 +9,7 @@ inspector = WavInspector()
 folder_path = r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 5 - APR5\Test 1\Infested"
 
 # Define output directory and filename
-output_dir = r"C:\Users\john\Desktop\WEEVIL DATA\TEST"
+output_dir = r"C:\Users\john\Desktop\WEEVIL DATA\TEST 6 - APR9"
 os.makedirs(output_dir, exist_ok=True)
 timestamp = datetime.now().strftime("%d-%b-%Y_%I-%M-%S%p")
 merged_output = f"TIBOK NG UOD_{timestamp}.wav"
@@ -25,7 +25,7 @@ print("Merged WAV file loaded successfully.")
 
 # Export amplitude per second
 inspector.export_amplitude_per_second(
-    r"C:\Users\john\Desktop\WEEVIL DATA\Actual\TEST 5 - APR5\Test 1\Infested_Amplitude.txt"
+    f"C:/Users/john/Desktop/WEEVIL DATA/Actual/TEST 6 - APR9/Amplitude_{timestamp}.txt"
 )
 
 # Plot waveform
