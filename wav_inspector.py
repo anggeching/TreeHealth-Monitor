@@ -1,11 +1,8 @@
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
-import scipy.signal as signal
-from pydub import AudioSegment
+import wave
 import os
-
-AudioSegment.converter = r"C:\ffmpeg\bin\ffmpeg.exe" 
 
 class WavInspector:
     def __init__(self, file_path=None):
@@ -14,35 +11,55 @@ class WavInspector:
         self.data = None
         self.time = None
 
+   
     def merge_wav_folder(self, folder_path, output_file="merged_output.wav"):
-            """
-            Merges all WAV files in a given folder into one continuous WAV file.
+        """
+        Merges WAV files with matching audio parameters from a folder.
 
-            Parameters:
-                folder_path (str): Path to the folder containing WAV files.
-                output_file (str): Name of the output merged file.
+        Skips incompatible files but prints a warning.
 
-            Returns:
-                str: Path of the merged file.
-            """
-            # Get all .wav files from the folder and sort them alphabetically
-            wav_files = sorted([
-                os.path.join(folder_path, f) 
-                for f in os.listdir(folder_path) 
-                if f.lower().endswith(".wav")
-            ])
+        Parameters:
+            folder_path (str): Path to folder with WAV files.
+            output_file (str): Name of the merged output file.
 
-            if not wav_files:
-                raise FileNotFoundError("No WAV files found in the specified folder.")
+        Returns:
+            str: Path to the merged WAV file.
+        """
+        wav_files = sorted([
+            os.path.join(folder_path, f)
+            for f in os.listdir(folder_path)
+            if f.lower().endswith(".wav")
+        ])
 
-            combined = AudioSegment.empty()
+        if not wav_files:
+            raise FileNotFoundError("No WAV files found in the specified folder.")
 
-            for file in wav_files:
-                audio = AudioSegment.from_wav(file)
-                combined += audio  # Append each file
+        valid_files = []
+        reference_params = None
 
-            combined.export(output_file, format="wav")
-            return output_file
+        # Identify compatible files
+        for file in wav_files:
+            with wave.open(file, 'rb') as wf:
+                if reference_params is None:
+                    reference_params = wf.getparams()
+                    valid_files.append(file)
+                elif wf.getparams() == reference_params:
+                    valid_files.append(file)
+                else:
+                    print(f"Skipped incompatible file: {file}")
+
+        if not valid_files:
+            raise ValueError("No compatible WAV files to merge.")
+
+        # Write merged file
+        with wave.open(output_file, 'wb') as out_wav:
+            out_wav.setparams(reference_params)
+            for file in valid_files:
+                with wave.open(file, 'rb') as wf:
+                    out_wav.writeframes(wf.readframes(wf.getnframes()))
+
+        print(f"Merged {len(valid_files)} files into: {output_file}")
+        return output_file
 
     def load_wav(self, file_path):
         """
