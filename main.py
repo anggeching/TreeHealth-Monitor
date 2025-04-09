@@ -4,6 +4,7 @@ from scipy.io import wavfile
 import matplotlib.pyplot as plt
 import wave
 import os
+import json
 
 class WavInspector:
     def __init__(self, file_path=None):
@@ -137,7 +138,7 @@ class WavInspector:
             delta_threshold (float): Threshold for maximum amplitude change per second.
 
         Returns:
-            str: "INFESTED" or "NOT INFESTED"
+            dict: JSON object with classification result and analysis data.
         """
         if self.data is None or self.sample_rate is None:
             raise ValueError("No WAV file loaded. Call load_wav() first.")
@@ -158,13 +159,19 @@ class WavInspector:
         print(f"STD of per-second average: {std_dev:.6f}")
         print(f"Max delta between seconds: {max_delta:.6f}")
 
-        if std_dev > std_threshold or max_delta > delta_threshold:
-            print("Classification: INFESTED")
-            return "INFESTED"
-        else:
-            print("Classification: NOT INFESTED")
-            return "NOT INFESTED"
+        classification = "INFESTED" if std_dev > std_threshold or max_delta > delta_threshold else "NOT INFESTED"
 
+        # Create the result as a JSON object
+        result = {
+            "classification": classification,
+            "std_dev": std_dev,
+            "max_delta": max_delta,
+            "std_threshold": std_threshold,
+            "delta_threshold": delta_threshold
+        }
+
+        # Return the result as a JSON string
+        return json.dumps(result)
 
 if __name__ == '__main__':
     # Example Usage (assuming you have a folder named 'wav_files' with some .wav files)
