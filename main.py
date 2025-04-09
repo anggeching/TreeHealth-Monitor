@@ -228,9 +228,10 @@ class WavInspector:
 if __name__ == '__main__':
     # --- Setup for testing ---
     test_folder = "test_wav_files"
+    
     if not os.path.exists(test_folder):
         os.makedirs(test_folder)
-    # Create two compatible dummy WAV files
+    
     sample_rate = 44100
     duration = 1  # seconds
     frequency = 440  # Hz (A4 note)
@@ -239,6 +240,7 @@ if __name__ == '__main__':
     data2 = 0.3 * np.sin(2. * np.pi * (frequency + 5) * t)
     wavfile.write(os.path.join(test_folder, "dummy_1.wav"), sample_rate, (data1 * 32767).astype(np.int16))
     wavfile.write(os.path.join(test_folder, "dummy_2.wav"), sample_rate, (data2 * 32767).astype(np.int16))
+    
     # Create one incompatible dummy WAV file (different sample rate)
     wavfile.write(os.path.join(test_folder, "dummy_incompatible.wav"), 22050, (data1 * 32767).astype(np.int16))
     # Create a single dummy WAV file for other tests
