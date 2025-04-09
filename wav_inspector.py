@@ -3,6 +3,10 @@ from scipy.io import wavfile
 import matplotlib.pyplot as plt
 import wave
 import os
+from datetime import datetime
+
+timestamp = datetime.now().strftime("%d-%b-%Y_%I-%M-%S%p")
+
 
 class WavInspector:
     def __init__(self, file_path=None):
@@ -102,7 +106,7 @@ class WavInspector:
         #plt.ylim(0, 1)
         plt.show()
     
-    def export_amplitude_per_second(self, output_txt="amplitude_per_second.txt"):
+    def export_amplitude_per_second(self, output_txt=f"amplitude_per_second_{timestamp}.txt"):
         """
         Computes and saves the average absolute amplitude per second to a text file.
 

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Vibration Inspection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-container {
+            padding: 20px;
+        }
+        .data-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container dashboard-container">
+        <h1 class="mb-4">Tree Vibration Inspection Dashboard</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="data-card">
+                    <h3>Not Infected Tree Vibration Data</h3>
+                    <canvas id="notInfectedChart"></canvas>
+                    <ul class="list-unstyled mt-3">
+                        <li><strong>Average Vibration:</strong> <span id="notInfectedAvg">-</span></li>
+                        <li><strong>Minimum Vibration:</strong> <span id="notInfectedMin">-</span></li>
+                        <li><strong>Maximum Vibration:</strong> <span id="notInfectedMax">-</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="data-card">
+                    <h3>Infected Tree Vibration Data</h3>
+                    <canvas id="infectedChart"></canvas>
+                    <ul class="list-unstyled mt-3">
+                        <li><strong>Average Vibration:</strong> <span id="infectedAvg">-</span></li>
+                        <li><strong>Minimum Vibration:</strong> <span id="infectedMin">-</span></li>
+                        <li><strong>Maximum Vibration:</strong> <span id="infectedMax">-</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="data-card">
+                    <h3>Comparison of Vibration Over Time</h3>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Not Infected Data
+        const notInfectedRawData = `
+0000s: -0.961342
+0001s: -0.961582
+0002s: -0.961510
+0003s: -0.961723
+0004s: -0.961340
+0005s: -0.961291
+0006s: -0.965396
+0007s: -0.963285
+0008s: -0.963798
+0009s: -0.963716
+0010s: -0.963834
+0011s: -0.965018
+0012s: -0.964408
+0013s: -0.965779
+0014s: -0.965287
+0015s: -0.969484
+0016s: -0.977265
+0017s: -0.977624
+0018s: -0.976998
+0019s: -0.977545
+0020s: -0.977701
+0021s: -0.977323
+0022s: -0.977748
+0023s: -0.977939
+0024s: -0.978179
+0025s: -0.978536
+0026s: -0.978590
+0027s: -0.978088
+0028s: -0.978096
+0029s: -0.978831
+0030s: -0.978016
+0031s: -0.977837
+0032s: -0.977601
+0033s: -0.977659
+0034s: -0.978176
+0035s: -0.977825
+0036s: -0.978288
+0037s: -0.978081
+0038s: -0.978436
+0039s: -0.978200
+0040s: -0.978858
+0041s: -0.978826
+0042s: -0.978839
+0043s: -0.978397
+0044s: -0.979194
+0045s: -0.979046
+0046s: -0.978442
+0047s: -0.978386
+0048s: -0.978507
+0049s: -0.977637
+0050s: -0.978022
+0051s: -0.978165
+0052s: -0.978607
+0053s: -0.978713
+0054s: -0.979243
+0055s: -0.978908
+0056s: -0.979276
+0057s: -0.979454
+0058s: -0.979602
+0059s: -0.979621
+0060s: -0.979480
+0061s: -0.978837
+0062s: -0.982715
+0063s: -0.984349
+0064s: -0.982845
+0065s: -0.982009
+0066s: -0.983100
+0067s: -0.985566
+0068s: -0.983877
+0069s: -0.982207
+0070s: -0.985524
+0071s: -0.989482
+0072s: -0.984126
+0073s: -0.983999
+0074s: -0.986133
+0075s: -0.992634
+0076s: -0.985356
+        `;
+        const notInfectedData = notInfectedRawData.trim().split('\n').map(line => {
+            const [time, value] = line.split(': ');
+            return { time, value: parseFloat(value) };
+        });
+        const notInfectedValues = notInfectedData.map(item => item.value);
+        const notInfectedTimes = notInfectedData.map(item => item.time);
+        const notInfectedAvg = notInfectedValues.reduce((a, b) => a + b, 0) / notInfectedValues.length;
+        const notInfectedMin = Math.min(...notInfectedValues);
+        const notInfectedMax = Math.max(...notInfectedValues);
+        document.getElementById('notInfectedAvg').textContent = notInfectedAvg.toFixed(6);
+        document.getElementById('notInfectedMin').textContent = notInfectedMin.toFixed(6);
+        document.getElementById('notInfectedMax').textContent = notInfectedMax.toFixed(6);
+
+        // Infected Data
+        const infectedRawData = `
+0000s: -0.992615
+0001s: -0.991534
+0002s: -0.985758
+0003s: -0.928748
+0004s: -0.724313
+0005s: -0.739197
+0006s: -0.748049
+0007s: -0.759460
+0008s: -0.770177
+0009s: -0.776260
+0010s: -0.784192
+0011s: -0.793609
+0012s: -0.798470
+0013s: -0.806228
+0014s: -0.815476
+        `;
+        const infectedData = infectedRawData.trim().split('\n').map(line => {
+            const [time, value] = line.split(': ');
+            return { time, value: parseFloat(value) };
+        });
+        const infectedValues = infectedData.map(item => item.value);
+        const infectedTimes = infectedData.map(item => item.time);
+        const infectedAvg = infectedValues.reduce((a, b) => a + b, 0) / infectedValues.length;
+        const infectedMin = Math.min(...infectedValues);
+        const infectedMax = Math.max(...infectedValues);
+        document.getElementById('infectedAvg').textContent = infectedAvg.toFixed(6);
+        document.getElementById('infectedMin').textContent = infectedMin.toFixed(6);
+        document.getElementById('infectedMax').textContent = infectedMax.toFixed(6);
+
+        // Chart 1: Not Infected
+        const notInfectedCtx = document.getElementById('notInfectedChart').getContext('2d');
+        new Chart(notInfectedCtx, {
+            type: 'line',
+            data: {
+                labels: notInfectedTimes,
+                datasets: [{
+                    label: 'Vibration',
+                    data: notInfectedValues,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Vibration Value'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (s)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Infected
+        const infectedCtx = document.getElementById('infectedChart').getContext('2d');
+        new Chart(infectedCtx, {
+            type: 'line',
+            data: {
+                labels: infectedTimes,
+                datasets: [{
+                    label: 'Vibration',
+                    data: infectedValues,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Vibration Value'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (s)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Comparison
+        const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+        new Chart(comparisonCtx, {
+            type: 'line',
+            data: {
+                labels: [...new Set([...notInfectedTimes, ...infectedTimes])].sort(), // Combine and sort times
+                datasets: [
+                    {
+                        label: 'Not Infected',
+                        data: notInfectedData.reduce((acc, curr) => {
+                            acc[curr.time] = curr.value;
+                            return acc;
+                        }, {}),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Infected',
+                        data: infectedData.reduce((acc, curr) => {
+                            acc[curr.time] = curr.value;
+                            return acc;
+                        }, {}),
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Vibration Value'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (s)'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
