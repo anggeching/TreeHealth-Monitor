@@ -226,7 +226,7 @@ class WavInspector:
         return json.dumps({"status": "success", "classification": classification, "std_dev": std_dev, "max_delta": max_delta, "std_threshold": std_threshold, "delta_threshold": delta_threshold})
 
 if __name__ == '__main__':
-    # --- Setup for testing ---
+
     test_folder = "test_wav_files"
     
     if not os.path.exists(test_folder):
