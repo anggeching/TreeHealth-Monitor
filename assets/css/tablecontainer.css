@@ -1,0 +1,78 @@
+/* Table Styling */
+.table-container {
+    width: 100%;
+    max-height: 600px; /* Adjust based on design */
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    /* Table Styling */
+.table-container {
+    width: 110%; /* width for the whole table
+    max-height: 300px; /* Adjust based on design */
+    overflow-y: auto;
+    margin-top: 20px;
+    margin-left: -43px;
+}
+}
+
+.device-header th {
+    background: #2d4819; /* Dark green background */
+    color: white;
+    font-size: 25px;
+    font-weight: normal; /* Ensures the text is not bold */
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.table thead {
+    background: #2d4819; /* Dark green */
+    color: white;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    width: 50%;  /* Ensures equal width for both columns */
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 2px solid black; /* Black dividers */
+}
+
+/* Target only the specific table header row (DATE AND TREE HEALTH STATUS WORD ONLY)*/
+.table thead tr:nth-child(2) th {
+    color: #273f1b;  /* Change this to your desired color */
+}
+
+
+.table tbody tr:nth-child(even) {
+    background: #ffffff; /* Keep even rows white */
+}
+
+.table tbody tr:nth-child(odd) {
+    background: #ffffff; /* Keep odd rows white */
+}
+
+
+
+
+/*Right Side of the Screen*/
+.status-box {
+    width: 350px; /* Adjust size */
+    height: 450px; /* Make it square */
+    background-color: #f4f4e4; /* Light background similar to your design */
+    border-radius: 5px; /* Rounded corners */
+    text-align: center;
+    padding: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+

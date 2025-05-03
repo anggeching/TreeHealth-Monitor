@@ -1,0 +1,154 @@
+/*MODAL*/
+/* Make sure modal is centered on all screen sizes */
+.modal-title {
+    color: white;
+}
+
+/* Center the modal properly */
+.modal-dialog {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important; /* Full height to align center */
+    margin: 0 auto !important; /* Remove default margins */
+}
+
+/* Keep modal a perfect square and prevent scrolling */
+.modal-content {
+    width: 370px !important;
+    height: 400px !important;
+    background: rgba(151, 165, 127, 0.7) !important;
+    border-radius: 40px !important; /* Increased curve */
+    box-shadow: none !important;
+    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden; /* Ensure no scrolling */
+}
+/*END NG WHOLE MODAL*/
+
+
+/*TAO ICON*/
+/* User Icon Container */
+.icon-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background: transparent; /* Transparent background */
+    border-radius: 50%;
+    border: 5px solid white; /* White border */
+    margin-bottom: 20px;
+    margin-top: 20px;
+    left: 36%;
+}
+
+/* Inner Circle */
+.icon-container::before {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 12%;
+}
+
+/* Body Shape */
+.icon-container::after {
+    content: "";
+    width: 45px;
+    height: 30px;
+    background: white;
+    border-radius: 40%;
+    position: absolute;
+    bottom: -3.2%;
+}
+/*END NG TAO ICON*/
+
+
+/*Lagayan ng input ng pass at username*/
+.custom-input {
+    background: transparent !important; 
+    border: 5px solid white !important;  /* White border */
+    border-radius: 20px !important;  /* Rounded corners */
+    padding: 1px;
+    width: 85% !important; /* Set width */
+    align-items: center;
+    display: flex;
+    margin: 45px auto 10px auto; /* Increased top margin to move it down */
+    justify-content: center; /* Align inner elements */
+}
+
+.custom-input:first-of-type {
+    margin-bottom: -35px; /* Adjust spacing between username and password */
+}
+
+
+/* Input Field */
+.custom-input input {
+    background: transparent !important;
+    border: none !important;
+    color: white !important; /* White text */
+    font-size: 18px; /* Adjust font size */
+    flex: 1;
+    outline: none !important; /* Remove focus outline */
+    box-shadow: none !important;
+}
+
+/* Input Placeholder (Username and Password Word sa Loob ng Input Fields)*/
+.custom-input input::placeholder {
+    color: white !important; /* White placeholder */
+    opacity: 0.7;
+}
+
+
+/* Icon Styling sa loob ng input fields*/
+.custom-input .input-group-text {
+    background: transparent !important;
+    border: none !important;
+    color: white !important; /* White icon */
+    font-size: 22px; /* Adjust icon size */
+    padding-left: 15px;
+}
+/*END NG LAGAYAN NG USERNAME AT PASSWORD*/
+
+/*LOGIN BUTTON*/
+.btn-success {
+    background-color: #273f1b !important;
+    border-color: #273f1b !important;
+    display: block;
+    margin: 10px auto; /* Center the button and add spacing */
+    text-align: center;
+    width: 50%; /* Adjust width as needed */
+    margin-top: 30px; /* Increase this value to move it lower */
+    letter-spacing: 1px;
+    font-weight: bold !important;
+}
+
+
+.navbar-nav .nav-item .nav-link[data-bs-toggle="modal"] {
+    cursor: pointer; /* Ensures it's still clickable */
+}
+
+/* Hide scrollbar when modal is open */
+body.modal-open {
+    overflow-y: hidden !important; /*gawing auto if gustong nanjan pa rin ang scroll tab*/
+    padding-right: 0px !important; /* Prevents layout shift */
+}
+
+/* Fix Bootstrap adding extra padding */
+.modal {
+    overflow-y: auto;
+}
+
+/* Prevent right-side scrollbar from appearing */
+.modal-open .modal {
+    overflow: hidden !important;
+}
+
+

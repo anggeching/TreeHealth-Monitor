@@ -1,0 +1,66 @@
+/* SIGN-UP MODAL */
+/* Centering and Styling */
+#signupModal .modal-title {
+    color: white;
+}
+
+/* Keep modal a perfect square and prevent scrolling */
+#signupModal .modal-dialog {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important; /* position ng sign up form */
+    margin: 0 auto !important; /* Remove default margins */
+}
+
+/* pinaka laman ng sign up form*/
+#signupModal .modal-content {
+    width: 370px !important;
+    height: 450px !important; /* Increased height for extra fields */
+    background: rgba(151, 165, 127, 0.7) !important;
+    border-radius: 38px !important; /* curve */
+    box-shadow: none !important;
+    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden; /* Ensure no scrolling */
+}
+
+/* "CREATE AN ACCOUNT" Heading */
+#signupModal h4.text-center {
+    color: white; /* White text for contrast */
+    font-size: 25px; /* Adjusted size */
+    font-weight: bold; /* Make it stand out */
+    text-align: center; /* Center alignment */
+    margin-top: 20px; /* Space from the top */
+    margin-bottom: 20px; /* Space before input fields */
+    letter-spacing: 1px; /* Slight spacing for readability */
+}
+
+/* sign up form*/
+#signupModal .custom-input {
+    background: transparent !important; 
+    border: 5px solid white !important;  /* White border */
+    border-radius: 20px !important;  /* Rounded corners */
+    padding: 1px;
+    width: 85% !important; /* Set width */
+    align-items: center;
+    display: flex;
+    margin: 25px auto; /* spacing ng fn, ea, un and pass */
+    justify-content: center; /* Align inner elements */
+}
+
+
+#signupModal .btn-primary {
+    background: #273f1b; /* Dark green color */
+    border-color: #273f1b !important;
+    border-radius: 12px;
+    margin: 10px auto; /* Center the button and add spacing */
+    text-align: center;
+    width: 50%; /* Adjust width as needed */
+    margin-top: -8px; /* Increase this value to move it lower */
+    letter-spacing: 1px;
+    font-weight: bold !important;
+}

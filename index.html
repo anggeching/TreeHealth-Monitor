@@ -1,0 +1,462 @@
+<?php
+// Start session if needed for user login
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeeVibes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/nature.css">
+    <link rel="stylesheet" href="assets/css/signup.css">
+    <link rel="icon" type="image/png" sizes="180x180" href="assets/images/logoweb.png">
+
+
+
+    <script src="js/nature.js"></script>
+    <script src="js/welcome_closeweb.js"></script>
+
+    <!-- Bootstrap 5.3.3 CSS (Matching JS Version) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar navmenu navbar-expand-lg fixed-top">
+
+    <a class="navbar-brand">
+        <img src="assets/images/logov2.png" class="py-2 px-4" alt="WeeVibes Logo" style="max-height: 70px; width: auto;">
+    </a>
+
+    <button class="navbar-toggler mx-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel" data-bs-scroll="true" data-bs-backdrop="false">
+
+        <div class="offcanvas-header justify-content-between">
+            <a class="navbar-brand">
+                <img src="assets/images/logov2.png" class="py-2 px-4" alt="WeeVibes Logo" style="max-height: 70px; width: auto;">
+            </a>
+            <button type="button" class="btn-close btn-close-light mx-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="nav-items navbar-nav justify-content-lg-center offcanvas-body">
+
+            <ul class="navbar-nav mx-lg-auto mx-5">
+                <li class="nav-item">
+                    <a class="nav-link nav-item" href="#home">Home</a>
+                </li >
+                <li class="d-none d-lg-inline separator">|</li>                                     
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="d-none d-lg-inline separator">|</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+                <li class="d-none d-lg-inline separator">|</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#NOD">
+                        <span class="d-none d-xxl-inline">Nature of Damage</span>
+                        <span class="d-none d-lg-inline d-xxl-none">N.O.D</span>
+                        <span class="d-inline d-md-inline d-lg-none">Nature of Damage</span>
+                    </a>
+                </li>
+                <li class="d-none d-lg-inline separator">|</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#faq">FAQ</a>
+                </li>
+                <li class="d-none d-lg-inline separator">|</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav mx-5 authenticate">
+                <li class="nav-item">
+                    <!-- Login Button triggers the modal -->
+    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                </li>
+
+                <li class="nav-item">
+            <!-- Sign Up Button triggers the modal -->
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
+                </li>
+            </ul>
+        </div>   
+    </div>
+</nav>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered d-flex align-items-center vh-100">
+        <div class="modal-content">
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+            <!-- User Icon Container -->
+            <div class="icon-container"></div>
+
+                <!-- Login Form -->
+                <form action="backend/login.php" method="POST">
+                    <!-- Username Field -->
+                    <div class="input-group custom-input">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" id="username" class="form-control" name="username" autocomplete="off" placeholder="Username" required>
+                    </div>
+                    <!-- Password Field -->
+                    <div class="input-group custom-input">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="password" class="form-control" name="password" autocomplete="off" placeholder="Password" required>
+                    </div>
+
+                    <div style="text-align: center; width: 100%;">
+                        <button type="submit" class="btn btn-success" name="login">LOGIN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- try -->
+
+<!-- SIGN UP MODAL -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered d-flex align-items-center vh-100">
+        <div class="modal-content">
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <!-- Create Account Heading -->
+                <h4 class="text-center">CREATE AN ACCOUNT</h4>
+
+                <!-- Sign Up Form -->
+                <form action="backend/signup.php" method="POST">
+                    <!-- Full Name Field -->
+                    <div class="input-group custom-input">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" class="form-control" name="full_name" autocomplete="off" placeholder="Full Name" required>
+                    </div>
+
+                    <!-- Email Address Field -->
+                    <div class="input-group custom-input">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" name="email" autocomplete="off" placeholder="Email Address" required>
+                    </div>
+
+                    <!-- Username Field -->
+                    <div class="input-group custom-input">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" class="form-control" name="username" autocomplete="off" placeholder="Username" required>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="input-group custom-input">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" name="password" autocomplete="off" placeholder="Password" required>
+                    </div>
+
+                    <div style="text-align: center; width: 100%;">
+                        <button type="submit" name="signup" class="btn btn-primary">SIGN UP</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <main>
+<!--HOMEEEEE-->
+            <section id="home" class="d-flex align-items-end">
+            <div class="container-fluid">
+                    <div class="col-12">
+                        <div class="text-container">
+                            <p class="text-start"><span id="BigLetter">W</span>EE<span id="BigLetter">V</span>IBES</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="subtitle">SMART SENSING DEVICE FOR <br> COCONUT TREE PEST DETECTION</p>
+                    </div>
+                </div>
+            </section>
+
+<!-- ABOUT SECTION -->
+<section id="about">
+    <div class="container">
+        <div class="row align-items-stretch">
+            <!-- Left Side: Image (Full Width on Medium Screens) -->
+            <div class="col-md-12 col-lg-5">
+                <img src="assets/images/devicev4.png" alt="WeeVibes Device" class="about-image">
+            </div>
+
+            <!-- Middle Line Separator (Visible Only on Large Screens) -->
+            <div class="col-lg-1 d-none d-lg-flex align-items-stretch justify-content-center position-relative">
+                <div class="about-separator"></div>
+            </div>
+
+            <!-- Right Side: Text Content -->
+            <div class="col-md-12 col-lg-6 text-lg-start">
+                <h2 class="about-title">WE DEVELOP SUSTAINABLE IOT BASED SOLUTIONS</h2>
+                <p class="about-text" style="text-align: justify;">
+                    Smart Sensing device for coconut tree pest detection
+                </p>
+                <p class="about-text" style="text-align: justify;">
+                    WeeVibes enables early and accurate detection of Asiatic Palm Weevil larvae in coconut trees. It provides real-time alerts through a web-based interface for continuous monitoring. By detecting infestations early, it helps prevent damage and supports effective pest management.
+                </p>
+                <p class="about-text" style="text-align: justify;">
+                    Its smart sensing technology enhances pest detection, allowing farmers to respond promptly and protect their coconut trees.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FEATURES SECTION -->
+<section id="features" class="py-5"> 
+    <div class="container text-center">
+        <h2 class="features-title mb-5">Features</h2>
+
+        <div class="row justify-content-center"> <!-- Centering Row -->
+            <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center mb-4">
+                <div class="feature-box">
+                    <h3>Status</h3>
+                    <div class="icon">
+                        <img src="assets/images/statusv7.png" alt="Status Logo" class="feature-logo">
+                    </div>
+                    <p>Get real-time status immediately upon larvae detection.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center mb-4">
+                <div class="feature-box">
+                    <h3>Detection</h3>
+                    <div class="icon">
+                        <img src="assets/images/vibration.png" alt="Vibration Logo" class="feature-logo">
+                    </div>  
+                    <p>Vibration detection for weevil larvae inside the coconut trunk.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center mb-4">
+                <div class="feature-box">
+                    <h3>History</h3>
+                    <div class="icon">
+                        <img src="assets/images/history.png" alt="History Logo" class="feature-logo">
+                    </div>
+                    <p>View timeline for completed detection readings.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!----------------nature of damage carousel--------------------->
+    <section class="container mt-4" id="NOD">
+      <div class="row">
+          <!-- Carousel on the left -->
+          <div class="col-lg-6">
+            <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+  
+              <!-- Indicators (dots) -->
+              <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+              </div>
+  
+              <div class="carousel-inner">
+  
+                  <!--image 1 - the pest-->
+                  <div class="carousel-item active" data-title="Asiatic Palm Weevil: The Pest" 
+                  data-text="The Asiatic Palm Weevil (APW) is an invasive insect pest that poses a serious threat to coconut trees. 
+                              It primarily targets the tree's trunk, making early detection crucial in preventing infestation and crop loss. 
+                              APW infestations have significantly affected coconut plantations in tropical regions, including the Philippines.">
+                      <img src="assets/images/img1.jpg" class="d-block w-100 img-fluid"  alt="UOD 1">
+                  </div>
+  
+                  <!--image 2 - life cycle ng apw-->
+                  <div class="carousel-item" data-title="APW Life Cycle: From Egg to Destruction" 
+                  data-text="The APW undergoes four stages: egg, larva, pupa, and adult. Females lay eggs in cracks or wounds on the coconut tree. 
+                              Once hatched, the larvae tunnel into the trunk, feeding on the soft tissues inside. 
+                              After several weeks, they transform into pupae and eventually emerge as adult weevils, ready to repeat the cycle.">
+                      <img src="assets/images/img2.jpg" class="d-block w-100 img-fluid"  alt="UOD 2">
+                  </div>
+  
+  
+                  <!--image 3 - process ng infestation-->
+                  <div class="carousel-item" data-title="Silent Intruders: How APW Tunnels into Trees" 
+                  data-text="APW larvae are the most destructive stage of the insect’s life cycle. 
+                  They burrow through the tree's trunk, creating tunnels as they feed on the internal tissues. 
+                  These tunnels weaken the tree's structure, often making infestations difficult to detect from the outside.">
+                      <img src="assets/images/burrow.jpg" class="d-block w-100 img-fluid" alt="UOD 3">
+                  </div>
+  
+                  <!--image 4 - damage-->
+                  <div class="carousel-item" data-title="Devastating Impact of APW Infestation" 
+                  data-text="Severe APW infestations can lead to yellowing leaves, wilting fronds, and hollowed trunks.
+                  If left untreated, the damage compromises the tree’s structural integrity, causing it to collapse. 
+                  Infestations also reduce coconut yield, affecting farmers' livelihoods and the local economy.">
+                      <img src="assets/images/destruct.jpg" class="d-block w-100 img-fluid" alt="UOD 4">
+                  </div>
+  
+              </div>
+          
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+              </button>
+          </div>
+          </div>
+  
+          <!-- Captions on the right -->
+          <div class="col-lg-6 d-flex align-items-center">
+              <div id="carouselCaptionsContainer" class="p-3 text-center">
+                  <h5 id="carouselTitle" class="fw-bold fs-4 mb-5"></h5> <!--font weight, font size, bottom margin(space between title and caption)-->
+                  <p id="carouselText" class= "fs-5 lh-lg"></p> <!--font size, line spacing (standard size 2)-->
+              </div>
+          </div>
+      </div>
+  </section>
+
+
+
+<!-- FREQUENTLY ASKED QUESTIONS -->
+<section id="faq">
+    <div class="faq-container">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <p class="faq-subtitle">Got a question? We’re here to answer! If you don’t see your question here, feel free to contact us!</p>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="faq-card">
+                    <div class="faq-border">
+                        <h5>What is Weevibes?</h5>
+                        <p class="faqqq">Weevibes is an Asiatic Palm Weevil larvae detection device designed to detect the presence of harmful weevils in coconut palms to prevent damage and improve crop health.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="faq-card">
+                    <div class="faq-border">
+                        <h5>How do I create an account on WeeVibes?</h5>
+                        <p class="faqqq">To get started, simply click on the Sign Up button on the homepage. Fill in your details, create a username and password, and you're all set! You can now be a protector of our coconut trees.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="faq-card">
+                    <div class="faq-border">
+                        <h5>How do I use the WeeVibes device?</h5>
+                        <p class="faqqq">Attach the device to the coconut tree trunk, power it on, then connect your phone or laptop. You can now start monitoring real-time data to help protect the tree.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="py-5" style="height:90vh;">
+    <div class="container text-center">
+        <h2 class="contact-title mb-4">CONTACT</h2>
+        <p class="contact-info mb-4">
+            Have a question or need assistance? We’re here to help! Please don’t hesitate to reach out if you have any queries. You can find our contact below:
+        </p>
+
+        <div class="d-flex justify-content-center">
+            <div class="col-md-8 col-lg-8 contact-container">
+                <div class="contact-item d-flex align-items-center text-center mb-4">
+                    <div class="contact-icon d-flex align-items-center flex-shrink-0 me-3">
+                        <i class="fas fa-envelope fa-lg"></i>
+                    </div>
+                    <div>
+                        <span class="contact-text fw-bold">Email:</span>
+                        <span class="contact-value">weevibes2025@gmail.com</span>
+                    </div>
+                </div>
+
+                <div class="contact-item d-flex align-items-center text-center mb-3">
+                    <div class="contact-icon d-flex align-items-center flex-shrink-0 me-3">
+                        <i class="fas fa-phone fa-lg"></i>
+                    </div>
+                    <div>
+                        <span class="contact-text fw-bold">Landline:</span>
+                        <span class="contact-value">043 - 33006457</span>
+                    </div>
+                </div>
+
+                <div class="contact-item d-flex align-items-center text-center mb-3">
+                    <div class="contact-icon d-flex align-items-center flex-shrink-0 me-3">
+                        <i class="fas fa-globe fa-lg"></i>
+                    </div>
+                    <div>
+                        <span class="contact-text fw-bold">Website:</span>
+                        <span class="contact-value">weevibes.outcastph.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="end-text mt-4">WE LOOK FORWARD TO ASSISTING YOU!</p>
+    </div>
+</section>
+
+<!-- Bootstrap 5.3.3 JavaScript Bundle (Includes Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap 5 JS (Required) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // JS for Active Link Handling
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        function setActiveNav() {
+            let scrollY = window.scrollY;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute("id");
+
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove("active");
+                        if (link.getAttribute("href") === `#${sectionId}`) {
+                            link.classList.add("active");
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener("scroll", setActiveNav);
+        setActiveNav(); // Run once on page load in case user refreshes at a specific section
+    });
+
+
+</script>
+<script src="js/prevent_back.js"></script>
+  </body>
+  </html>
+  

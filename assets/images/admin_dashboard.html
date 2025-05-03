@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, Admin</h1>
+    <p>You are logged in as <strong>chesca</strong>.</p>
+
+    <button onclick="sendAction('action1')">Clean</button>
+    <button onclick="sendAction('action2')">Infested</button>
+
+    <script>
+        function sendAction(actionType) {
+    fetch('https://weevibes.outcastph.com/api/update_threshold.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'action=' + encodeURIComponent(actionType)
+    })
+    .then(response => response.json())
+    .then(data => alert('Server response: ' + JSON.stringify(data)))
+    .catch(error => alert('Error: ' + error));
+}
+
+    </script>
+</body>
+</html>

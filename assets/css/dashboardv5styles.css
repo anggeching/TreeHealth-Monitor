@@ -1,0 +1,261 @@
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d6e0c5;
+}
+
+/* Sidebar */
+.sidebar {
+    background: linear-gradient(to bottom, #071e07, #0d330e, #2d531a, #477023, #6e8649);
+    color: white;
+    height: 100vh;
+    width: 220px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar Shrinks on Small Screens */
+@media (max-width: 600px) {
+    .sidebar {
+        width: 150px;
+    }
+
+    .sidebar-btn {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    .sidebar .logo-container img {
+        max-width: 80%;
+    }
+}
+
+/* Sidebar Buttons */
+.sidebar-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.sidebar-btn i {
+    font-size: 18px;
+}
+
+.sidebar-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Logo */
+.logo-container {
+    text-align: center;
+}
+
+/* Content */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Content Resizing */
+@media (max-width: 600px) {
+    .content {
+        margin-left: 160px;
+        padding: 10px;
+    }
+
+    .content h1 {
+        font-size: 20px;
+    }
+}
+
+/* Menu Toggle Button */
+.menu-toggle {
+    display: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    z-index: 1100;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .sidebar.active {
+        width: 180px;
+        padding: 20px;
+    }
+
+    .menu-toggle {
+        display: block !important;
+    }
+
+    .content {
+        margin-left: 0 !important;
+        padding: 15px;
+    }
+}
+
+/* Logout Button - Mobile */
+.logout-mobile {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background-color: #071e07;
+    color: white;
+    width: 38px; /* Initially small */
+    height: 34px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: none;
+    transition: width 0.3s ease-in-out;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 4px;
+}
+
+/* Icon inside the button */
+.logout-mobile i {
+    font-size: 16px;
+    transition: margin 0.3s ease-in-out;
+    margin: 8px; /*position ng icon logout*/
+
+}
+
+/* Logout text (initially hidden) */
+.logout-mobile span {
+    font-size: 12px;
+    opacity: 0;
+    margin-left: -38px; /*position ng iconna logout sa maliit na chrome*/
+    transition: opacity 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+}
+
+/* Expand and show text on hover */
+.logout-mobile:hover {
+    width: 100px; /* position of text when hover */
+    justify-content: center; /* Keep everything centered */
+}
+
+.logout-mobile:hover span {
+    opacity: 1;
+    margin-left: 2px; /* Add spacing between icon and text */
+}
+
+/* Hide sidebar logout button on small screens */
+@media (max-width: 768px) {
+    .sidebar .logout-btn {
+        display: none !important;
+    }
+
+    .logout-mobile {
+        display: flex !important; /* Ensure it appears */
+    }
+}
+
+
+/* Show Logout Button on Small Screens */
+@media (max-width: 768px) {
+    .logout-mobile {
+        display: flex; /* Show only when screen is resized */
+    }
+}
+
+/* Make Sidebar Content Fit on Smaller Screens */
+@media (max-height: 600px) {
+    .sidebar {
+        padding: 10px 0; /* Reduce padding */
+    }
+
+    .sidebar-btn {
+        font-size: 14px;
+        padding: 6px 10px; /* Less padding */
+    }
+
+    .sidebar .logo-container img {
+        max-width: 70%; /* Reduce logo size */
+    }
+}
+
+/* Prevent Sidebar Content from Getting Cut Off */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures items are evenly spaced */
+}
+
+/* Ensure Recordings Button is Always Visible */
+.sidebar .sidebar-menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*css 217lines*/
+
+
+.custom-text-color {
+    color: #273f1b; /* Change the welcome text color*/
+}
+
+.first-text {
+    margin-top:42px !important; /*MOVE THE WELCOME TEXT TO BOTTOM*/
+}
+
+.icon-color {
+    color: #eec124; /*icon color*/
+}
+
+@media (max-width: 600px) {
+    .content section {
+        margin-left: 30px; /* Moves icon and text to the right */
+    }
+}
+
+@media (max-width: 768px) {
+    .content section {
+        margin-top: 3px;
+        margin-left: 50px;
+        font-size: 13px;
+    }
+
+    .content h1 {
+        font-size: 18px; /* Reduce font size for better fit */
+    }
+
+    .content p {
+        font-size: 14px; /* Reduce paragraph font size */
+    }
+}
+
+.logout-mobile {
+    display: none; /* Hide logout button by default */
+}
+
+
+

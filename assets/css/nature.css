@@ -1,0 +1,56 @@
+.carousel {
+    width: 90%; /* Increase width */
+    max-width: 425px; /* Adjust maximum size */
+    margin: auto;
+    overflow: hidden;
+    border: 8px solid #2f4f1f;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top:25px;
+    margin-bottom: 40px;
+}
+
+
+/* Frame and Images */
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Adjust Image Size */
+.carousel-item img {
+    width: 100%;
+    height: 600px;
+    max-height: 600px; /* Adjust height */
+    object-fit: cover; /* Ensure images fill the space */
+    border-radius: 10px;
+}
+
+
+body {
+    background-color: #e2e2d3 !important; /* Change to your preferred color */
+    overflow-x: hidden; /*tinanggal yung scrollbar from left to right*/
+}
+
+/*----for captions-------*/
+#carouselCaptionsContainer {
+    text-align: center; /* Centers text horizontally */
+}
+
+#carouselCaptionsContainer p {
+    text-align: justify; /* Justifies text */
+}
+
+#carouselTitle {
+    color: #273f1b; /* Custom dark green title text */
+}
+
+#carouselText {
+    color: #273f1b; /* Custom dark green paragraph text */
+}
+
+@media (max-width: 992px) { /* scaling down images */
+    .carousel-item img {
+        height: 500px;
+    }
+}

@@ -1,0 +1,55 @@
+/* Table Styling */
+/* Make Table Wider on Small Screens */
+@media (max-width: 768px) {
+    .table-container {
+        width: 120%; /* Expands width slightly */
+        margin-left: -60px;
+    }
+}
+
+
+.device-header th {
+    background: #2d4819; /* Dark green background */
+    color: white;
+    font-size: 25px;
+    font-weight: normal; /* Ensures the text is not bold */
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.table thead {
+    background: #2d4819; /* Dark green */
+    color: white;
+    font-weight: bold;
+    position: sticky;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center; /* Centers text */
+    vertical-align: middle;
+    border-bottom: 2px solid black; /* Black dividers */
+    width: auto; /* Remove fixed width */
+    white-space: nowrap; /* Prevents column text wrapping */
+    width: 15%;
+}
+
+
+/* Target only the specific table header row (DATE AND TREE HEALTH STATUS WORD ONLY)*/
+.table thead tr:nth-child(2) th {
+    color: #273f1b;  /* Change this to your desired color */
+}
+
+
+.table tbody tr:nth-child(even) {
+    background: #ffffff; /* Keep even rows white */
+}
+
+.table tbody tr:nth-child(odd) {
+    background: #ffffff; /* Keep odd rows white */
+}

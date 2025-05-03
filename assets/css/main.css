@@ -1,0 +1,557 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 99px; /*para sakto ang pagpunta sa bawat sections pag pinipindot sa nav*/
+}
+
+
+/* ------------------------------------------- NAVIGATION ------------------------------------------- */
+
+.navbar {
+    background-color: #273f1b;     padding: 0;
+    --bs-navbar-padding-y: 0 !important; 
+    padding-top: 0 !important; 
+    padding-bottom: 0 !important;
+    max-height: 80px;
+}
+
+.navbar-brand {
+    background-color: #2f4f1f; 
+    padding: 0 !important;
+    margin-right: 87px !important;
+}
+
+.separator {
+    color: #c1c29b;
+    font-size: 25px;
+    padding-top: 2px;
+    margin-top: 2px;
+}
+
+/* NAVIGATION LINKS */
+.navbar-nav .nav-item .nav-link {
+    color: white !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 15px;
+    padding-left: 8px !important;
+    padding-right: 6px !important;
+    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+    letter-spacing: 3px;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.separator {
+    color: white;
+    font-weight: bold;
+    padding: 0 10px;
+    user-select: none; 
+}
+
+.navbar-nav .nav-link:hover, 
+.navbar-nav .nav-link.active {
+    color: #c3c993 !important; 
+    border-bottom: 2px solid #c3c993;
+}
+
+
+
+/* AUTHENTICATION */
+.navbar-nav.authenticate .nav-item {
+    padding: 0 3px; /* Add padding for better spacing */
+}
+
+.navbar-nav.authenticate .nav-link {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.navbar-nav.authenticate .nav-link {
+    padding: 8px 15px; /* Add padding to make the box visible */
+    border-radius: 5px; /* Rounded corners */
+    transition: all 0.3s ease-in-out;
+    margin-top: 5px;
+}
+
+.navbar-nav.authenticate .nav-link:hover {
+    background-color: #6c863d; /* Light green background */
+    color: white; /* Dark green text */
+    border-radius: 5px; /* Smooth rounded corners */
+}
+
+/* OFFCANVAS */
+button.navbar-toggler{
+    color: white;
+}
+
+.offcanvas-header {
+    background-color:#2f4f1f;
+    padding: 0 !important;
+    height: 70px !important;
+}
+
+.offcanvas-body {
+    background-color: #273f1b; 
+}
+
+
+/* ------------------------------------------- HOME ------------------------------------------- */
+.container-fluid {
+    background-image: url('../images/bg-true.jpg'); /* Change to your image path */
+    background-size: cover; /* Ensures the image always covers the container */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents repetition */
+    width: 100%; /* Full width */
+    min-height: 100vh; /* Full screen height */
+}
+
+/* Make the big letters larger and bold */
+/*Big Letters*/
+#BigLetter {
+    font-size:80px;
+    font-weight: bold; /* Makes text bold */
+    color: #c1c29b; /* Change to your desired color */
+}
+
+/* Style the paragraph text */
+/*Small Letters*/
+p {
+    font-size: 50px;
+    font-weight: bold; /* Makes text bold */
+    color: #c1c29b; /* Change to your desired color */
+}
+
+/*FOR SHORT DESCRIPTION*/
+.subtitle {
+    font-size: 25px;
+}
+
+/* Whole TEXT */
+.text-container {
+    margin-top: 280px; /* Moves text a bit lower */
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 992px) {
+    #BigLetter {
+        font-size: 60px;
+    }
+
+    p {
+        font-size: 40px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+
+    .text-container {
+        margin-top: 330px;
+    }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 768px) {
+    #BigLetter {
+        font-size: 45px;
+    }
+
+    p {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+
+    .text-container {
+        margin-top: 330px;
+    }
+}
+
+/* ------------------------------------------- ABOUT ------------------------------------------- */
+
+#about .container {
+    width: 100%; /* Ensures the container does not restrict the background */
+}
+#about {
+    background-color: #e2e2d3 !important; /* Change to your preferred color */
+    padding: 80px 0;
+    position: relative;  /* Ensures child elements stay inside */
+    display: flex;
+    align-items: center; /* Aligns content properly */
+}
+
+/* Image styling */
+.about-image {
+    max-width: 100%;
+    display: auto;
+    margin-top: 10px;
+}
+
+/* Text styling */
+.about-text {
+    font-size: 18px;
+    color: #273f1b;
+    line-height: 1.6;
+    margin-left: 40px;
+}
+
+/* Title styling */
+.about-title {
+    font-weight: bold;
+    text-align: center;
+    color: #273f1b;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+/* Middle Separator Line */
+.about-separator {
+    width: 3px; /* Adjust thickness */
+    background-color: #273f1b; /* Dark green */
+    min-height: 142.7%; /* Ensures full height on large screens */
+    position: absolute;
+    top: -80px;
+    bottom: 0;
+    left: 90%; /* Centers it */
+    transform: translateX(-50%);
+}
+
+@media (max-width: 1400px) {  /* Medium Screens */
+    .about-separator {
+        width: 3px; /* Adjust thickness */
+        background-color: #273f1b; /* Dark green */
+        min-height: 140%; /* Ensures full height on large screens 139.7*/
+        position: absolute;
+        top: -80px;
+        bottom: 0;
+        left: 90%; /* Centers it */
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 1200px) {  /* Medium Screens */
+    .about-separator {
+        width: 3px; /* Adjust thickness */
+        background-color: #273f1b; /* Dark green */
+        min-height: 132.5%; /* Ensures full height on large screens 139.7*/
+        position: absolute;
+        top: -80px;
+        bottom: 0;
+        left: 90%; /* Centers it */
+        transform: translateX(-50%);
+    }
+}
+
+/* ----- Responsive Adjustments ----- */
+@media (max-width: 991px) {  /* Medium Screens */
+    .about-text {
+        margin-left: -10px; /* Adjust margin for medium screens */
+    }
+}
+
+
+
+@media (max-width: 768px) {  /* Small Screens */
+    .about-text {
+        margin-left: 0; /* Center text on small screens */
+        text-align: center;
+    }
+}
+
+/* ------------------------------------------- FEATURES ------------------------------------------- */
+#features {
+    padding: 60px 0;
+    width: 100vw; /* Ensures it spans the full width of the viewport */
+}
+
+#features .container {
+    width: 100%; /* Ensures the container does not restrict the background */
+}
+
+.features-title {
+    font-weight: bold;
+    color: #273f1b;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+/* FEATURES SECTION */
+#features {
+    background-color: #d6e0c5 !important; /* Change to your preferred color */
+    padding: 60px 0; /* Adds spacing */
+}
+/* Feature Icons */
+.feature-logo {
+    width: 90px;  /* Adjust the size of the logos (make it smaller) */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 5px; /* Reduced space below the logo */
+}
+
+.feature-box {
+    background-color: #97a57f; /* Light Olive */
+    color: #97a57f;
+    padding: 30px;  /* Increased padding inside the feature boxes */
+    width: 300px;  /* Increased width of the feature boxes */
+    height: 320px;  /* Added height to make the boxes bigger */
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;  /* Ensures padding is included in the width and height */
+}
+
+.feature-box h3 {
+    color: #273f1b; /* Dark Olive */
+    font-size: 20px; /* Increase font size for better visibility */
+}
+
+.feature-box .icon {
+    font-size: 50px;  /* Increased icon size */
+    margin: 20px 0;  /* Adjusted space around icons */
+}
+
+.feature-box p {
+    color: #273f1b !important; /* Ensure text remains dark olive */
+    font-size: 18px;  /* Increased text size */
+    line-height: 1.5;  /* Added line height for readability */
+}
+
+/* Hover Effect */
+.feature-box:hover {
+    transform: translateY(-10px);
+    background-color: #425c37; /* Dark Evergreen */
+    cursor: pointer;
+}
+
+/* Change text color on hover */
+.feature-box:hover h3, 
+.feature-box:hover p {
+    color: #f9f8f4 !important;  /* Changes text color to light (Off-White) */
+}
+
+
+/* ------------------------------------------- FOQ ------------------------------------------- */
+.faq-container {
+    background-color: #d6e0c5;
+    padding: 60px; /* Add padding to the container */
+}
+.faq-section {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.faq-title {
+    font-weight: bold;
+    color: #273f1b;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.faq-subtitle {
+    color: #273f1b;
+    margin-bottom: 40px;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+.faq-card {
+    background-color: #f9f8f4;
+    border-radius: 10px;
+    padding: 20px;
+    color: #273f1b;
+    font-weight: bold;
+    height: 100%; /* Make sure cards take up the same height */
+}
+.faq-card h5 {
+    background-color: #f9f8f4;
+    padding: 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+.faq-card p {
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+.faqqq {
+    font-size: 20px;
+    color: #273f1b;
+    text-align: justify;
+}
+
+.faq-border {
+    background-color: #97a57f;
+    border-radius: 8px;
+    padding: 20px;
+    height: 100%; /* Make sure cards take up the same height */
+}
+
+/* ------------------------------------------- CONTACT ------------------------------------------- */
+#contact {
+    background-color: #e2e2d3 !important; /* Change to your preferred color */
+}
+
+#contact {
+    pointer-events: none;
+}
+#contact .container {
+    pointer-events: auto;
+}
+
+.contact-title {
+    font-weight: bold;
+    color: #273f1b;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.contact-info {
+    color: #273f1b;
+    margin-bottom: 40px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #2C3B1E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #273f1b;
+    margin-left: 265px;
+}
+
+
+/*specific contact details*/
+.contact-text {
+    font-weight: bold;
+    color: #273f1b;
+    font-size: 20px;
+}
+
+/*word for email, landline and website only*/
+.contact-value {
+    font-weight: normal;
+    color: #273f1b;
+    font-size: 18px;
+
+}
+
+.end-text {
+    font-weight: bold;
+    color: #273f1b;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 0;
+    padding-bottom: 10px; /* Adjust as needed */
+}
+
+/* Responsive font sizes for different screen sizes*/
+@media (max-width: 1400px) {
+    .contact-icon {
+        margin-left: 210px;
+    }
+}
+
+/* Responsive font sizes for different screen sizes*/
+@media (max-width: 1200px) {
+    .contact-icon {
+        margin-left: 140px;
+    }
+}
+
+/* Responsive font sizes for different screen sizes*/
+@media (max-width: 992px) {
+    .contact-icon {
+        margin-left: 70px;
+    }
+
+    .contact-info {
+        max-width: 100%; /* Adjust width */
+    }
+}
+/* Responsive font sizes for different screen sizes*/
+@media (max-width: 768px) {
+    .contact-title {
+        font-size: 20px;
+    }
+
+    .contact-info {
+        font-size: 18px;
+    }
+
+    .contact-text {
+        font-size: 18px;
+    }
+
+    .contact-value {
+        font-size: 17px;
+    }
+
+    .end-text {
+        font-size: 19px;
+    }
+
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        padding: 10px;
+        margin-left: 15px;
+    }
+}
+
+/* Responsive font sizes for mobile*/
+@media (max-width: 600px) {
+    .contact-title {
+        font-size: 20px;
+    }
+
+    .contact-info {
+        font-size: 16px;
+    }
+
+    .contact-text {
+        font-size: 16px;
+    }
+
+    .contact-value {
+        font-size: 16px;
+    }
+
+    .end-text {
+        font-size: 17px;
+    }
+
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        padding: 10px;
+        margin-left: 15px;
+    }
+}
+
