@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
 
             echo "<script>
                     sessionStorage.setItem('username', '" . addslashes($username) . "');
-                    window.location.href = '../dashboardv5.html';
+                    window.location.href = '../pages/dashboardv5.html';
                   </script>";
         } else {
             echo "<script>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../db/pdo_conn.php';
-$conn = getPDOConnection('outcastp_weevibes');
+$conn = getPDOConnection('weevibes');
 
 if (isset($_POST['signup'])) {
     if (

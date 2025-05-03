@@ -2,7 +2,7 @@
 require_once '../db/pdo_conn.php';
 
 function setUserStatus($userId, $status) {
-    $conn = getPDOConnection('outcastp_weevibes');
+    $conn = getPDOConnection('weevibes');
     $sql = "UPDATE member SET status=? WHERE id=?";
     $stmt = $conn->prepare($sql);
     return $stmt->execute([$status, $userId]);
@@ -10,7 +10,7 @@ function setUserStatus($userId, $status) {
 
 if (isset($_POST['username']) && !isset($_POST['logout_on_close'])) {
     $username = $_POST['username'];
-    $conn = getPDOConnection('outcastp_weevibes');
+    $conn = getPDOConnection('weevibes');
     $sql = "SELECT id FROM member WHERE username=?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$username]);
@@ -28,7 +28,7 @@ if (isset($_POST['username']) && !isset($_POST['logout_on_close'])) {
     echo "Status set to not active"; 
 } elseif (isset($_POST['username']) && isset($_POST['logout_on_close']) && $_POST['logout_on_close'] === 'true') {
     $username = $_POST['username'];
-    $conn = getPDOConnection('outcastp_weevibes');
+    $conn = getPDOConnection('weevibes');
     $sql = "SELECT id FROM member WHERE username=?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$username]);
