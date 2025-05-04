@@ -214,10 +214,6 @@ This section provides a basic guide for setting up the backend web application.
 
 Once the backend is set up, the Raspberry Pi units can send data to the API endpoints as described in the System Architecture section.  Users can also interact with the system through the user authentication endpoints.
 
-## Contributing
-
-Contributions to this research project are welcome. Please refer to the [CONTRIBUTING.md](https://github.com/your-github-username/weevibes-research/CONTRIBUTING.md) file for guidelines.
-
 ## Acknowledgements
 
 This research is focused on establishing fundamental cause-and-effect relationships within a controlled environment and is a crucial step towards developing a practical early detection system for the Asiatic Palm Weevil.
