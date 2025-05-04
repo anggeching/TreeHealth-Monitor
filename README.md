@@ -57,28 +57,47 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 
 The Scripts are organized as follows:
 
-TreeHealth-Monitor/
-├── api/
-│   ├── vibrations/
-│   │   ├── classifications.php      Handles POST for submitting classifications
-│   │   ├── get_classifications.php  Handles GET for retrieving classifications
-│   │   ├── readings.php             Handles GET for retrieving vibration reading times
-│   │   ├── vibrations.php           Handles POST for uploading raw vibration data
-│   ├── users/                       Handles user registration, login, logout
-│   │   ├── login.php                               
-│   │   ├── logout.php
-│   │   ├── signup.php
-│   │   ├── status.php                         
-│   ├── logs/
-│   │   ├── vibrations_classification.log           Logs for classifications POST
-│   │   ├── vibration_upload.log                    Logs for vibration uploads  POST
-├── db/ (Optional: If you keep database connection files outside api)
-│   ├── pdo_conn.php                                Database connection file
-├── model/
-│   │   ├── DataHandler.php                         Handles data manipulation - INSERT TO DATABASE
-│   │   ├── DataFetcher.php                         Handles data retrieval 
-│   │   ├── User.php                                User model class
-
+your_project_root/
+│
+├── public/                 # <-- WEB SERVER DOCUMENT ROOT points here
+│   │
+│   ├── index.html          # Login form page (or main entry point)
+│   ├── signup.html         # Signup form page
+│   ├── dashboard.html      # Example page users see after login
+│   │
+│   ├── css/                # Directory for CSS files
+│   │   └── style.css       # Example stylesheet
+│   │
+│   └── js/                 # Directory for JavaScript files
+│       ├── auth.js         # Example JS for handling login/signup forms (AJAX)
+│       └── main.js         # General JS for the dashboard, etc.
+│
+├── src/                    # <-- CORE PHP APPLICATION CODE (NOT directly web accessible)
+│   │
+│   ├── Api/                # Directory for API endpoint scripts
+│   │   ├── login.php       # Handles login requests
+│   │   ├── signup.php      # Handles registration requests
+│   │   ├── logout.php      # Handles logout requests
+│   │   └── status.php      # Handles user status updates
+│   │
+│   ├── Database/           # Directory for database related code
+│   │   └── pdo_conn.php    # Contains the getPDOConnection() function
+│   │
+│   ├── Models/             # Directory for data model classes
+│   │   └── User.php        # The User class model
+│   │
+│   ├── Lib/                # (Optional) For shared libraries or helper functions
+│   │   └── helpers.php     # Example for utility functions
+│   │
+│   └── config/             # (Optional but Recommended) Configuration files
+│       └── database.php    # Example: Store DB credentials here (load in pdo_conn.php)
+│                           # !! IMPORTANT: Keep sensitive config outside the web root if possible !!
+│
+├── vendor/                 # (Optional) For Composer dependencies (if you use Composer)
+│
+├── .htaccess               # (Optional) Apache configuration (e.g., URL rewriting, blocking access to src/)
+│
+└── composer.json           # (Optional) Composer configuration file
 
 
 **Explanation of Key Directories and Files:**
