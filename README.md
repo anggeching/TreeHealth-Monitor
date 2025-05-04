@@ -1,8 +1,5 @@
 # Weevibes: IoT-Based Early Detection System for Asiatic Palm Weevil Larvae (Research Prototype)
 
-[![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://github.com/your-github-username/weevibes-research)
-[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-blue.svg)](https://github.com/your-github-username/weevibes-research/CONTRIBUTING.md)
-
 ## Overview
 
 Weevibes is a research prototype for an IoT-based system designed for the early detection of Asiatic Palm Weevil (APW) larvae infestation in coconut trees. This project leverages vibration sensors and a web application to establish a cause-and-effect relationship between specific vibration patterns and the presence of APW larvae under controlled environmental conditions.
