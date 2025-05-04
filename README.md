@@ -1,6 +1,5 @@
 # Weevibes: IoT-Based Early Detection System for Asiatic Palm Weevil Larvae (Research Prototype)
 
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://github.com/your-github-username/weevibes-research)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-blue.svg)](https://github.com/your-github-username/weevibes-research/CONTRIBUTING.md)
 
