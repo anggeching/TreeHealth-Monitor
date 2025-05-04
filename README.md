@@ -58,13 +58,12 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
         "filename": "...",
         "date": "DD-Mon-YYYY",
         "time": "HH:MM",
-        // ... other relevant information
     }
     ```
 
 ### `/api/receive_classification.php`
 
-* **Method:** `POST` (Assumed)
+* **Method:** `POST` 
 * **Content-Type:** `application/json`
 * **Request Body (Example):**
     ```json
@@ -107,7 +106,7 @@ This section provides a basic guide for setting up the backend web application.
     ```
 
 2.  **Database Configuration:**
-    * Create a MySQL database named `outcastp_weevibes`.
+    * Create a MySQL database named `weevibes`.
     * Update the database connection details in `db/pdo_conn.php` with your database credentials:
         ```php
         <?php
@@ -135,8 +134,3 @@ Contributions to this research project are welcome. Please refer to the [CONTRIB
 
 This research is focused on establishing fundamental cause-and-effect relationships within a controlled environment and is a crucial step towards developing a practical early detection system for the Asiatic Palm Weevil.
 
-## Contact
-
-[Your Name/Organization]
-[Your Email Address]
-[Link to your website/profile (optional)]

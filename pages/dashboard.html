@@ -31,9 +31,9 @@ if (isset($_SESSION['user'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/dashboardv5styles.css">
-    <link rel="stylesheet" href="assets/css/tablecontainer.css">
-    <link rel="icon" type="image/png" sizes="180x180" href="assets/images/logoweb.png">
+    <link rel="stylesheet" href="../assets/css/dashboardstyles.css">
+    <link rel="stylesheet" href="../assets/css/tablecontainer.css">
+    <link rel="icon" type="image/png" sizes="180x180" href="../assets/images/logoweb.png">
 
     
 
@@ -47,11 +47,11 @@ if (isset($_SESSION['user'])) {
     <!-- Sidebar -->
     <aside class="sidebar d-flex flex-column justify-content-between">
         <div class="logo-container text-center">
-            <img src="assets/images/logo-bottom.png" alt="WeeVibes Logo" class="img-fluid">
+            <img src="../assets/images/logo-bottom.png" alt="WeeVibes Logo" class="img-fluid">
         </div>
         
         <nav class="menu-items mt-4">
-            <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='dashboardv5.html'"> <i class="fas fa-tachometer-alt"></i> Dashboard</button>
+            <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='dashboard.html'"> <i class="fas fa-tachometer-alt"></i> Dashboard</button>
             <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='historylog.html'"><i class="fas fa-history"></i> History Log</button>
            <!-- <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='recordings.html'"><i class="fas fa-video"></i> Recordings</button>-->
             <!-- Logout Button (Hidden on Small Screens) -->
@@ -101,7 +101,7 @@ if (isset($_SESSION['user'])) {
             <!-- Status Box -->
             <div class="col-lg-4 col-md-12 mt-3 mt-lg-3 d-flex justify-content-center">
                 <div class="status-box" id="statusBox">
-                    <img src="assets/images/dashdevice.jpg" class="img-fluid w-100 h-100 object-fit-cover" alt="Status Image">
+                    <img src="../assets/images/dashdevice.jpg" class="img-fluid w-100 h-100 object-fit-cover" alt="Status Image">
                 </div>
 
             </div>
@@ -121,12 +121,12 @@ if (isset($_SESSION['user'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
-    <script src="js/scriptv5.js"></script>
-    <script src="js/close.js"></script>
-    <script src="js/status.js"></script>
-    <script src="js/prevent_back.js"></script>
-    <script src="js/statusbox.js"></script>
-    <script src="js/tree_status.js"></script>
+    <script src="../assets/js/scriptv5.js"></script>
+    <script src="../assets/js/close.js"></script>
+    <script src="../assets/js/status.js"></script>
+    <script src="../assets/js/prevent_back.js"></script>
+    <script src="../assets/js/statusbox.js"></script>
+    <script src="../assets/js/tree_status.js"></script>
 
 
 </body>
