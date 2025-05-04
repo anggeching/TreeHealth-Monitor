@@ -1,8 +1,8 @@
 <?php
 // api/classifications.php (for POST requests to submit new classifications)
 
-require '../db/pdo_conn.php'; // Adjust the path as needed
-require '../model/DataHandler.php';
+require '../../db/pdo_conn.php';
+require '../../Models/DataHandler.php';
 
 // Set the log file
 $logDirectory = '../logs/';

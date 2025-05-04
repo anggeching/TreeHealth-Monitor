@@ -1,8 +1,8 @@
 <?php
 // api/vibrations.php (for POST requests to upload new vibration data)
 
-require '../db/pdo_conn.php';
-require '../Model/DataHandler.php';
+require '../../db/pdo_conn.php';
+require '../../Models/DataHandler.php';
 
 $logDirectory = '../logs/';
 $logFile = $logDirectory . 'upload_wav.log';

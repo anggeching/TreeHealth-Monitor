@@ -1,8 +1,8 @@
 <?php
 // api/vibrations/readings.php (for GET requests to fetch vibration reading timestamps)
 
-require '../db/pdo_conn.php';
-require '../model/DataFetcher.php';
+require '../../db/pdo_conn.php';
+require '../../Model/DataFetcher.php'; 
 
 header('Content-Type: application/json');
 

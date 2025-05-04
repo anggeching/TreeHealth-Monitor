@@ -1,8 +1,8 @@
 <?php
 // api/vibrations/get_classifications.php (for GET requests to retrieve classifications)
 
-require '../../db/pdo_conn.php'; // Adjust the path
-require '../../model/DataFetcher.php'; // Adjust the path
+require '../../db/pdo_conn.php';
+require '../../Model/DataFetcher.php'; 
 
 // Set the log file
 $logDirectory = '../../logs/'; // Adjust the path
