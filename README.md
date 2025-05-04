@@ -57,9 +57,6 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 
 The Scripts are organized as follows:
 
-
-
-
 ```
 TreeHealth-Monitor/
 │
@@ -97,11 +94,15 @@ TreeHealth-Monitor/
 │   ├── dashboard.html               # Classification data display
 │   └── historylog.html              # History of reading vibrations display
 │
+├── raspberrypi/
+│   ├── main.py                      # python script inside the Raspberry Pi
+│   └── requirements.txt             # Packages needed to install for main.py
+│
+├── DAS.cpp                          # C++ code for the esp32 (the DAS)
+│
 └── index.html                       # Landing page of webapp
 
 ```
-
-
 
 **Explanation of Key Directories and Files:**
 
