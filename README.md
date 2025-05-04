@@ -25,7 +25,7 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 
 ## System Architecture (Controlled Environment)
 
-![System Architecture Diagram (Optional - Consider adding a visual diagram here if you have one)](./docs/architecture.png)
+![System Architecture Diagram](assets/images/architecture.jpg)
 
 1.  **Sensing Unit (Coconut Tree):**
     * **ESP32 Microcontroller:** Controls the vibration sensor and data transmission.
