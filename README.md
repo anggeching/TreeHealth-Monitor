@@ -57,7 +57,7 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 
 The Scripts are organized as follows:
 
-'''
+```
 your_project_root/
 ├── public/                 # <-- WEB SERVER DOCUMENT ROOT points here
 │   ├── index.html          # Login form page (or main entry point)
@@ -94,7 +94,8 @@ your_project_root/
 ├── .htaccess               # (Optional) Apache configuration (e.g., URL rewriting, blocking access to src/)
 │
 └── composer.json           # (Optional) Composer configuration file
-'''
+```
+
 
 
 **Explanation of Key Directories and Files:**
