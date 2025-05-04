@@ -19,7 +19,7 @@ today_date = datetime.now().strftime("%Y-%m-%d")  # Standardized date format
 output_folder = f"C:/xampp/htdocs/WeeVibesV2/raw_vibrations/{today_date}" # More descriptive folder
 merge_folder_path = f"C:/xampp/htdocs/WeeVibesV2/merged_vibrations" # More descriptive folder
 amp_folder_path = f"C:/xampp/htdocs/WeeVibesV2/amplitude_data" # More descriptive folder
-CLASSIFICATION_THRESHOLD_SECONDS = 10 # Minimum interval for sending classifications
+CLASSIFICATION_THRESHOLD_SECONDS = 10 
 
 # --- Singleton WavInspector Instance ---
 wav_inspector_instance = None
@@ -111,7 +111,7 @@ class WavInspector:
 
     def _send_vibration_data_to_server(self, filepath):
         """Sends the WAV file to the /api/vibrations endpoint."""
-        url = "http://localhost/WeeVibesv2/api/vibrations" # RESTful URL
+        url = "http://localhost/WeeVibesv2/api/vibrations/vibrations.php" # RESTful URL
         try:
             with open(filepath, 'rb') as file:
                 files = {'file': (os.path.basename(filepath), file, 'audio/wav')}
@@ -260,7 +260,7 @@ class WavInspector:
 
     def _send_classification_to_server(self, classification_data_json_string):
         """Sends the classification to the /api/classifications endpoint."""
-        url = "http://localhost/weevibesv2/api/classifications" # RESTful URL
+        url = "http://localhost/weevibesv2/api/vibrations/classifications.php" # RESTful URL
         headers = {'Content-Type': 'application/json'}
         try:
             classification_data = json.loads(classification_data_json_string)
@@ -306,4 +306,4 @@ def run(server_class=HTTPServer, handler_class=MyHandler, port=8000):
             wav_inspector_instance.stop_merge_thread()
 
 if __name__ == '__main__':
-    run(port=5000)  
+    run(port=5000)  # Runs the server on port 5000
