@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../db/pdo_conn.php';
-require_once '../Models/User.php'; 
+require_once '../../db/pdo_conn.php';
+require_once '../../Models/User.php'; 
 
 $conn = getPDOConnection('weevibes');
 
@@ -14,7 +14,6 @@ if (isset($_POST['signup'])) {
         !empty($_POST['password'])
     ) {
         try {
-            // Create a new User object from POST data
             $user = new User(
                 null, // ID is null initially
                 $_POST['full_name'],
@@ -27,7 +26,6 @@ if (isset($_POST['signup'])) {
             $user->status = 'not active';
 
             // --- Security Enhancement: Hash the Password ---
-            // Use PHP's built-in password hashing function
             $hashedPassword = password_hash($user->password, PASSWORD_DEFAULT);
             if ($hashedPassword === false) {
                 // Handle hashing error

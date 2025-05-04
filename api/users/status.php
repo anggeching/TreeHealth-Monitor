@@ -1,8 +1,8 @@
 <?php
 // Only start session if needed (e.g., for logout_status case)
 // session_start(); // Uncomment if session data is strictly needed BEFORE requires
-require_once '../db/pdo_conn.php';
-require_once '../Models/User.php'; // Include the User model
+require_once '../../db/pdo_conn.php';
+require_once '../../Models/User.php'; 
 
 /**
  * Updates the status of a user in the database.

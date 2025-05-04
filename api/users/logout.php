@@ -1,8 +1,7 @@
 <?php
 session_start();
-// No User model needed here unless setUserStatus required it.
-require_once '../db/pdo_conn.php'; // Needed by setUserStatus
-require_once 'status.php';      // Contains setUserStatus
+require_once '../../db/pdo_conn.php';
+require_once 'status.php';
 
 // Check if user session exists before trying to update status
 if (isset($_SESSION['user'])) {

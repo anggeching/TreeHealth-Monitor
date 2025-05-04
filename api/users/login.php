@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once '../db/pdo_conn.php';
+require_once '../../db/pdo_conn.php';
 require_once 'status.php';
-require_once '../Models/User.php'; // Include the User model
+require_once '../../Models/User.php'; 
 
 $conn = getPDOConnection('weevibes');
 
