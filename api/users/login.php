@@ -34,14 +34,14 @@ if (isset($_POST['login'])) {
 
                 echo "<script>
                         sessionStorage.setItem('username', '" . addslashes($user->username) . "');
-                        window.location.href = '../pages/dashboard.html';
+                        window.location.href = '../../pages/dashboard.html';
                       </script>";
                 exit(); // Important to exit after redirect
             } else {
                 // Invalid password
                 echo "<script>
                         alert('Invalid username or password');
-                        window.location.href = '../index.html';
+                        window.location.href = '../../index.html';
                       </script>";
                 exit();
             }
@@ -49,7 +49,7 @@ if (isset($_POST['login'])) {
              // Invalid username
              echo "<script>
                      alert('Invalid username or password');
-                     window.location.href = '../index.html';
+                     window.location.href = '../../index.html';
                    </script>";
              exit();
         }
@@ -57,7 +57,7 @@ if (isset($_POST['login'])) {
          // Fields empty - handle appropriately
          echo "<script>
                  alert('Please enter username and password');
-                 window.location.href = '../index.html';
+                 window.location.href = '../../index.html';
                </script>";
          exit();
     }

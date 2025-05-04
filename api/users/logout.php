@@ -23,7 +23,7 @@ session_destroy();
 echo "<script>
     // sessionStorage.removeItem('username'); // Also clear client-side session storage if used
     alert('You have successfully logged out.');
-    window.location.href = '../index.html';
+    window.location.href = '../../index.html';
     </script>";
 
 exit(); // Ensure script termination
