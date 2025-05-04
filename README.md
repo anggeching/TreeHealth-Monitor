@@ -195,7 +195,7 @@ This section provides a basic guide for setting up the backend web application.
         ```php
         <?php
         $host = 'your_db_host';
-        $dbname = 'outcastp_weevibes';
+        $dbname = 'weevibes';
         $user = 'your_db_user';
         $password = 'your_db_password';
         ?>
