@@ -58,22 +58,17 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 The Scripts are organized as follows:
 
 your_project_root/
-│
 ├── public/                 # <-- WEB SERVER DOCUMENT ROOT points here
-│   │
 │   ├── index.html          # Login form page (or main entry point)
 │   ├── signup.html         # Signup form page
 │   ├── dashboard.html      # Example page users see after login
-│   │
 │   ├── css/                # Directory for CSS files
 │   │   └── style.css       # Example stylesheet
-│   │
 │   └── js/                 # Directory for JavaScript files
 │       ├── auth.js         # Example JS for handling login/signup forms (AJAX)
 │       └── main.js         # General JS for the dashboard, etc.
 │
 ├── src/                    # <-- CORE PHP APPLICATION CODE (NOT directly web accessible)
-│   │
 │   ├── Api/                # Directory for API endpoint scripts
 │   │   ├── login.php       # Handles login requests
 │   │   ├── signup.php      # Handles registration requests
@@ -98,6 +93,7 @@ your_project_root/
 ├── .htaccess               # (Optional) Apache configuration (e.g., URL rewriting, blocking access to src/)
 │
 └── composer.json           # (Optional) Composer configuration file
+
 
 
 **Explanation of Key Directories and Files:**
