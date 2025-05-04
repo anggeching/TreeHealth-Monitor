@@ -28,7 +28,7 @@ if (isset($_SESSION['user'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../assets/css/dashboardv5styles.css">
+    <link rel="stylesheet" href="../assets/css/dashboardstyles.css">
     <link rel="stylesheet" href="../assets/css/historylog.css">
     <link rel="icon" type="image/png" sizes="180x180" href="../assets/images/logoweb.png">
 
@@ -47,11 +47,11 @@ if (isset($_SESSION['user'])) {
         </div>
         
         <nav class="menu-items mt-4">
-            <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='dashboardv5.html'"> <i class="fas fa-tachometer-alt"></i> Dashboard</button>
+            <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='dashboard.html'"> <i class="fas fa-tachometer-alt"></i> Dashboard</button>
             <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='historylog.html'"><i class="fas fa-history"></i> History Log</button>
            <!-- <button class="sidebar-btn btn text-white w-100" onclick="window.location.href='recordings.html'"><i class="fas fa-video"></i> Recordings</button>-->
             <!-- Logout Button (Hidden on Small Screens) -->
-            <button class="sidebar-btn btn text-white w-100 logout-btn" onclick="window.location.href='backend/logout.php'"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button class="sidebar-btn btn text-white w-100 logout-btn" onclick="window.location.href='../api/logout.php'"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </nav>
     </aside>
 
