@@ -37,7 +37,7 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 
 3.  **Web Application Server:**
     * **Backend Language:** PHP
-    * **Web Server:** (Likely Apache or Nginx)
+    * **Web Server:** Apache
     * **Database:** MySQL (`outcastp_weevibes`)
     * **API Endpoints:**
         * `/api/upload_wav.php`: Processes and stores raw vibration data from WAV files.
