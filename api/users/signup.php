@@ -56,7 +56,7 @@ if (isset($_POST['signup'])) {
             echo "
                 <script>
                     alert('Registration successful! You can now log in.');
-                    window.location.href = '../index.html';
+                    window.location.href = '../../index.html';
                 </script>
             ";
             exit();
@@ -76,7 +76,7 @@ if (isset($_POST['signup'])) {
                 echo "
                     <script>
                         alert('An error occurred during registration. Please try again later.');
-                        window.location.href = '../pages/signup.html';
+                        window.location.href = '../../pages/signup.html';
                     </script>
                 ";
             }
@@ -87,7 +87,7 @@ if (isset($_POST['signup'])) {
              echo "
                  <script>
                      alert('An unexpected error occurred. Please try again later.');
-                     window.location.href = '../pages/signup.html';
+                     window.location.href = '../../pages/signup.html';
                  </script>
              ";
              exit();
@@ -98,7 +98,7 @@ if (isset($_POST['signup'])) {
         echo "
             <script>
                 alert('Please fill in all required fields.');
-                window.location.href = '../index.html'; // Redirect back to signup
+                window.location.href = '../../index.html'; // Redirect back to signup
             </script>
         ";
         exit();
@@ -106,7 +106,7 @@ if (isset($_POST['signup'])) {
 } else {
      // Handle case where 'signup' is not set in POST (e.g., direct access)
      // Optional: Redirect or show an error
-     header('Location: ../index.html');
+     header('Location: ../../index.html');
      exit();
 }
 ?>
