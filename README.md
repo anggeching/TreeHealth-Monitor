@@ -15,8 +15,11 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 * **Real-time Data Logging Pipeline:** Raw vibration data is transmitted immediately upon recording from the ESP32 to the Raspberry Pi, and then forwarded to the web server for logging.
 * **Daily Infestation Classification Pipeline:** The Raspberry Pi performs daily analysis (implementation details not included here) and sends an "infected" or "not infected" classification to the web server.
 * **API Endpoints for Data Ingestion:**
-    * `/api/upload_wav.php`: Receives raw vibration data as WAV files.
-    * `/api/receive_classification.php`: Receives daily infestation classifications in JSON format.
+    * `/api/vibrations`: Receives raw vibration data as WAV files.
+    * `/api/vibrations/readings`: Retrieves vibration reading times.
+    * `/api/vibrations/classifications`: Submits a new classification result.
+    * `/api/vibrations/get_classifications`: Retrieves classification data.
+* **User Authentication:** Handles user registration, login, and logout for the web application.
 * **Data Storage:** Utilizes a MySQL database to store raw vibration data and infestation classifications.
 * **Basic Logging:** Implements logging for debugging and monitoring the data ingestion process.
 
@@ -31,60 +34,95 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
 
 2.  **Edge Computing & Forwarding Unit (Raspberry Pi):**
     * **Raspberry Pi:** Receives data from the ESP32.
-    * **Real-time Data Forwarding:** Immediately sends raw WAV files to the web server's `/api/upload_wav.php` endpoint.
+    * **Real-time Data Forwarding:** Immediately sends raw WAV files to the web server's `/api/vibrations` endpoint.
     * **Daily Analysis & Classification:** Performs analysis on the collected vibration data (analysis logic resides here).
-    * **Classification Reporting:** Sends daily "infected" or "not infected" classifications (in JSON format) to the web server's `/api/receive_classification.php` endpoint.
+    * **Classification Reporting:** Sends daily "infected" or "not infected" classifications (in JSON format) to the web server's `/api/vibrations/classifications` endpoint.
 
 3.  **Web Application Server:**
     * **Backend Language:** PHP
     * **Web Server:** Apache
     * **Database:** MySQL (`outcastp_weevibes`)
     * **API Endpoints:**
-        * `/api/upload_wav.php`: Processes and stores raw vibration data from WAV files.
-        * `/api/receive_classification.php`: Receives and stores daily infestation classifications.
+        * Vibration Data:
+            * `POST /api/vibrations`: Processes and stores raw vibration data from WAV files.
+            * `GET /api/vibrations/readings`: Retrieves vibration reading times.
+            * `POST /api/vibrations/classifications`: Receives and stores daily infestation classifications.
+            * `GET /api/vibrations/get_classifications`: Retrieves classification data.
+        * User Authentication:
+            * `POST /api/users/register`:  Registers a new user.
+            * `POST /api/users/login`:   Logs in an existing user.
+            * `POST /api/users/logout`:  Logs out the current user.
+
+## API File Structure
+
+The API is organized as follows:
+
+WeeVibesV2/├── api/│   ├── vibrations/│   │   ├── classifications.php (Handles POST for submitting classifications)│   │   ├── get_classifications.php (Handles GET for retrieving classifications)│   │   ├── readings.php (Handles GET for retrieving vibration reading times)│   │   ├── vibrations.php (Handles POST for uploading raw vibration data)│   ├── users/│   │   ├── users.php (Handles user registration, login, logout)│   │   ├── auth.php    (Optional:  Authentication middleware/utilities)│   ├── db/│   │   ├── pdo_conn.php (Database connection file)│   ├── model/│   │   ├── DataHandler.php (Handles data manipulation - INSERT)│   │   ├── DataFetcher.php (Handles data retrieval - SELECT)│   │   ├── User.php      (Optional: User model class)│   ├── logs/│   │   ├── vibrations_classification.log (Logs for classifications POST)│   │   ├── get_vibrations_classifications.log (Logs for classifications GET)│   │   ├── vibration_upload.log (Logs for vibration uploads)│   │   ├── vibration_readings.log│   │   ├── user_auth.log       (Logs for user authentication)│   ├── index.php (Optional: Could be used for API routing or documentation)├── db/ (Optional: If you keep database connection files outside api)│   ├── pdo_conn.php├── model/ (Optional: If you keep model files outside api)│   ├── DataHandler.php│   ├── DataFetcher.php│   ├── User.php      (Optional: User model class)├── logs/ (Optional: If you keep logs outside api)│   ├── ...├── ... (Other application files)
+**Explanation of Key Directories and Files:**
+
+* `api/`: Contains all API endpoint files.
+* `api/vibrations/`: Groups all vibration-related API endpoints.
+    * `classifications.php`: Handles POST requests for submitting new classifications.
+    * `get_classifications.php`: Handles GET requests for retrieving classifications.
+    * `readings.php`: Handles GET requests for retrieving vibration reading times.
+    * `vibrations.php`: Handles POST requests for uploading raw vibration data.
+* `api/users/`:  Contains all user-related API logic.
+    * `users.php`:    Handles core user management actions (registration, login, logout).
+    * `auth.php`:     (Optional)  Contains authentication middleware and utility functions.
+* `api/db/`: Contains database-related files.
+    * `pdo_conn.php`: Handles the PDO database connection.
+* `api/model/`: Contains files that handle data logic (models).
+    * `DataHandler.php`: Handles database interactions for data manipulation (e.g., inserting data).
+    * `DataFetcher.php`: Handles database interactions for data retrieval (e.g., fetching data).
+    * `User.php`: (Optional) Represents user data and related operations.
+* `api/logs/`: Contains log files.
+    * `vibrations_classification.log`: For POST requests to /api/vibrations/classifications
+    * `get_vibrations_classifications.log`: For GET requests to /api/vibrations/get_classifications
+    * `vibration_upload.log`: For POST requests to /api/vibrations
+    * `vibration_readings.log`: For GET requests to /api/vibrations/readings
+    * `user_auth.log`: For user authentication-related events.
+* Optional Directories: The `db/`, `model/`, and `logs/` directories can be located either inside the `api/` directory or at the root level of the application.
 
 ## API Endpoints
 
-### `/api/upload_wav.php`
+### Vibration Data
 
-* **Method:** `POST`
-* **Content-Type:** `multipart/form-data` (expects a file upload with the field name `file`)
-* **Request Body:** Includes a WAV file named according to the format `DD-Mon-YYYY_HH-MM-SS[AM|PM].wav`.
-* **Response (JSON):**
-    ```json
-    {
-        "status": "success" | "error",
-        "message": "...",
-        "filename": "...",
-        "date": "DD-Mon-YYYY",
-        "time": "HH:MM",
-    }
-    ```
+* `POST /api/vibrations`
+    * Purpose: Uploads a WAV file containing raw vibration data.
+    * Request: `multipart/form-data` with the WAV file in the `file` field.
+    * Response: `201 Created` (on success) with details.
 
-### `/api/receive_classification.php`
+* `GET /api/vibrations/readings`
+    * Purpose: Retrieves a list of timestamps (dates and times) when vibration data was recorded.
+    * Request: None.
+    * Response: `200 OK` (on success) with an array of timestamps.
 
-* **Method:** `POST` 
-* **Content-Type:** `application/json`
-* **Request Body (Example):**
-    ```json
-    {
-        "timestamp": "YYYY-MM-DD HH:MM:SS",
-        "classification": "infected"
-    }
-    ```
-* **Response (JSON):**
-    ```json
-    {
-        "status": "success" | "error",
-        "data": [
-            {
-                "date": "d M Y",
-                "classification": "infected" | "not infected"
-            },
-            // ... more classification data
-        ]
-    }
-    ```
+* `POST /api/vibrations/classifications`
+    * Purpose: Submits a new classification result with a timestamp.
+    * Request: `application/json` with `classification` and `timestamp`.
+    * Response: `201 Created` (on success).
+
+* `GET /api/vibrations/get_classifications`
+    * Purpose: Retrieves a list of classification data with their dates.
+    * Request: None.
+    * Response: `200 OK` (on success) with an array of date-classification pairs.
+
+### User Authentication
+
+* `POST /api/users/register`
+    * Purpose: Registers a new user.
+    * Request: `application/json` with user registration details (e.g., username, password).
+    * Response:  `201 Created` on success, with user details.
+
+* `POST /api/users/login`
+    * Purpose: Logs in an existing user.
+    * Request: `application/json` with user login credentials (e.g., username, password).
+    * Response: `200 OK` on success, with authentication token.
+
+* `POST /api/users/logout`
+    * Purpose: Logs out the current user.
+    * Request:  None or possibly a token.
+    * Response: `200 OK` on success.
 
 ## Getting Started
 
@@ -100,14 +138,17 @@ This section provides a basic guide for setting up the backend web application.
 ### Installation
 
 1.  **Clone the repository:**
+
     ```bash
     git clone [https://github.com/your-github-username/weevibes-research.git](https://github.com/your-github-username/weevibes-research.git)
     cd weevibes-research/web_app_server
     ```
 
 2.  **Database Configuration:**
+
     * Create a MySQL database named `weevibes`.
     * Update the database connection details in `db/pdo_conn.php` with your database credentials:
+
         ```php
         <?php
         $host = 'your_db_host';
@@ -116,15 +157,16 @@ This section provides a basic guide for setting up the backend web application.
         $password = 'your_db_password';
         ?>
         ```
-    * You will need to create the necessary database tables. While the schema is not explicitly provided in this documentation, you will need tables to store the raw WAV data and the daily classifications.
+    * You will need to create the necessary database tables. While the schema is not explicitly provided in this documentation, you will need tables to store the raw WAV data, daily classifications, and user information.
 
 3.  **Web Server Configuration:**
+
     * Ensure your web server is configured to serve the PHP files in this directory.
     * Make sure the web server has write permissions to the `../uploads/` directory for storing uploaded WAV files and the `../logs/` directory for log files.
 
 ### Usage
 
-Once the backend is set up, the Raspberry Pi units can send data to the API endpoints as described in the System Architecture section.
+Once the backend is set up, the Raspberry Pi units can send data to the API endpoints as described in the System Architecture section.  Users can also interact with the system through the user authentication endpoints.
 
 ## Contributing
 
@@ -133,4 +175,3 @@ Contributions to this research project are welcome. Please refer to the [CONTRIB
 ## Acknowledgements
 
 This research is focused on establishing fundamental cause-and-effect relationships within a controlled environment and is a crucial step towards developing a practical early detection system for the Asiatic Palm Weevil.
-
