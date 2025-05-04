@@ -60,11 +60,11 @@ The Scripts are organized as follows:
 TreeHealth-Monitor/
 ├── api/
 │   ├── vibrations/
-│   │   ├── classifications.php                     Handles POST for submitting classifications
-│   │   ├── get_classifications.php                 Handles GET for retrieving classifications
-│   │   ├── readings.php                            Handles GET for retrieving vibration reading times
-│   │   ├── vibrations.php                          Handles POST for uploading raw vibration data
-│   ├── users/                                      Handles user registration, login, logout
+│   │   ├── classifications.php      Handles POST for submitting classifications
+│   │   ├── get_classifications.php  Handles GET for retrieving classifications
+│   │   ├── readings.php             Handles GET for retrieving vibration reading times
+│   │   ├── vibrations.php           Handles POST for uploading raw vibration data
+│   ├── users/                       Handles user registration, login, logout
 │   │   ├── login.php                               
 │   │   ├── logout.php
 │   │   ├── signup.php
@@ -75,8 +75,8 @@ TreeHealth-Monitor/
 ├── db/ (Optional: If you keep database connection files outside api)
 │   ├── pdo_conn.php                                Database connection file
 ├── model/
-│   │   ├── DataHandler.php                         Handles data manipulation - INSERT
-│   │   ├── DataFetcher.php                         Handles data retrieval - SELECT
+│   │   ├── DataHandler.php                         Handles data manipulation - INSERT TO DATABASE
+│   │   ├── DataFetcher.php                         Handles data retrieval 
 │   │   ├── User.php                                User model class
 
 
