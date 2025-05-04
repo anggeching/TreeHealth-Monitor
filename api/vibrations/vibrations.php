@@ -1,8 +1,8 @@
 <?php
-// api/upload_wav.php
+// api/vibrations.php (for POST requests to upload new vibration data)
 
 require '../db/pdo_conn.php';
-require '../model/DataHandler.php';
+require '../Model/DataHandler.php';
 
 $logDirectory = '../logs/';
 $logFile = $logDirectory . 'upload_wav.log';
@@ -11,7 +11,7 @@ function log_execution($message) {
     global $logFile;
     date_default_timezone_set('Asia/Manila');
     $timestamp = date("Y-m-d H:i:s");
-    $logMessage = "[{$timestamp}] {$message}\n";
+    $logMessage = "[{$timestamp}] [VIBRATIONS - POST] {$message}\n";
     file_put_contents($logFile, $logMessage, FILE_APPEND);
 }
 
@@ -21,6 +21,9 @@ function getCurrentTime24H() {
 }
 
 log_execution("Script started.");
+
+// Set the content type for the response
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     log_execution("Received POST request with 'file'.");
@@ -60,12 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
                     if ($dataHandler->insertWavData($extractedDate, $currentTime24H, $wavFileContent)) {
                         $response = array(
                             'status' => 'success',
-                            'message' => 'File uploaded and data saved to database successfully.',
+                            'message' => 'Vibration data uploaded and saved successfully.',
                             'filename' => $filename,
                             'date' => $extractedDate,
                             'time' => $currentTime24H,
                         );
-                        http_response_code(200);
+                        http_response_code(201); // Created
                         header('Content-Type: application/json');
                         echo json_encode($response);
                         log_execution("Database insertion successful. Response sent: " . json_encode($response));
@@ -73,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
                     } else {
                         $response = array(
                             'status' => 'error',
-                            'message' => 'File uploaded successfully, but failed to save data to the database.',
+                            'message' => 'File uploaded successfully, but failed to save vibration data to the database.',
                         );
                         http_response_code(500); // Internal Server Error
                         header('Content-Type: application/json');

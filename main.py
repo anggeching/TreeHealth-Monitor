@@ -15,10 +15,11 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # --- Global Variables ---
-today_date = datetime.now().strftime("%B %d")
-output_folder = f"C:/xampp/htdocs/WeeVibesV2/{today_date}"
-merge_folder_path = f"C:/xampp/htdocs/WeeVibesV2/MERGED"
-amp_folder_path = f"C:/xampp/htdocs/WeeVibesV2/AMPLITUDE"
+today_date = datetime.now().strftime("%Y-%m-%d")  # Standardized date format
+output_folder = f"C:/xampp/htdocs/WeeVibesV2/raw_vibrations/{today_date}" # More descriptive folder
+merge_folder_path = f"C:/xampp/htdocs/WeeVibesV2/merged_vibrations" # More descriptive folder
+amp_folder_path = f"C:/xampp/htdocs/WeeVibesV2/amplitude_data" # More descriptive folder
+CLASSIFICATION_THRESHOLD_SECONDS = 10 # Minimum interval for sending classifications
 
 # --- Singleton WavInspector Instance ---
 wav_inspector_instance = None
@@ -30,6 +31,7 @@ class WavInspector:
         self.data = None
         self.time = None
         self.merge_interval = merge_interval  # Merge interval in seconds
+        self.last_sent_classification_time = 0 # Timestamp of last sent classification
         self.last_sent_classification = None  # To store the last sent classification
         self._stop_event = threading.Event()
         self._merge_thread = None
@@ -50,7 +52,7 @@ class WavInspector:
     def _run_merge_timer(self):
         while not self._stop_event.is_set():
             logging.info(f"Running merge process...")
-            timestamp = datetime.now().strftime("%d-%b-%Y_%I-%M-%S%p")
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") # Standardized timestamp
             merge_filename = f"{timestamp}.wav"
             merge_filepath = os.path.join(merge_folder_path, merge_filename)
             amp_filename = f"{timestamp}.txt"
@@ -65,11 +67,13 @@ class WavInspector:
                 classification_result_json = self.classify_infestation()
                 logging.info(f"Classification Result JSON: {classification_result_json}")
 
-                if classification_result_json != self.last_sent_classification:
+                current_time = time.time()
+                if current_time - self.last_sent_classification_time >= CLASSIFICATION_THRESHOLD_SECONDS and classification_result_json != self.last_sent_classification:
                     if self._send_classification_to_server(classification_result_json):
                         self.last_sent_classification = classification_result_json
+                        self.last_sent_classification_time = current_time
                 else:
-                    logging.info("Classification result has not changed. Skipping send.")
+                    logging.info("Classification result has not changed or minimum send interval not met. Skipping send.")
             else:
                 logging.info("No WAV files to merge.")
 
@@ -91,7 +95,7 @@ class WavInspector:
             request.wfile.write(response.encode())
             return
 
-        timestamp = datetime.now().strftime("%d-%b-%Y_%I-%M-%S%p")
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") # Standardized timestamp
         filename = f"{timestamp}.wav"
         filepath = os.path.join(folder_path, filename)
 
@@ -103,17 +107,17 @@ class WavInspector:
         request.send_header("Content-type", "text/html")
         request.end_headers()
         request.wfile.write(response.encode())
-        self._send_file_to_server(filepath)
+        self._send_vibration_data_to_server(filepath) # More RESTful name
 
-    def _send_file_to_server(self, filepath):
-        """Sends the WAV file to the upload_wav.php endpoint."""
-        url = "http://localhost/WeeVibesv2/api/upload_wav.php"
+    def _send_vibration_data_to_server(self, filepath):
+        """Sends the WAV file to the /api/vibrations endpoint."""
+        url = "http://localhost/WeeVibesv2/api/vibrations" # RESTful URL
         try:
             with open(filepath, 'rb') as file:
                 files = {'file': (os.path.basename(filepath), file, 'audio/wav')}
                 response = requests.post(url, files=files)
                 response.raise_for_status()
-                logging.info(f"File sent successfully: {filepath} - Status Code: {response.status_code}")
+                logging.info(f"Vibration data sent successfully: {filepath} - Status Code: {response.status_code}")
                 logging.debug(f"Server response content: {response.text}")
                 try:
                     response_json = response.json()
@@ -125,7 +129,7 @@ class WavInspector:
                 except json.JSONDecodeError:
                     logging.debug("Server response is not valid JSON.")
         except requests.exceptions.RequestException as e:
-            logging.error(f"Network error sending file {filepath}: {e}")
+            logging.error(f"Network error sending vibration data {filepath}: {e}")
         except FileNotFoundError:
             logging.error(f"File not found when trying to send: {filepath}")
         except Exception as e:
@@ -245,6 +249,7 @@ class WavInspector:
         classification = "INFESTED" if std_dev > std_threshold or max_delta > delta_threshold else "NOT INFESTED"
 
         result = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), # Include timestamp
             "classification": classification,
             "std_dev": std_dev,
             "max_delta": max_delta,
@@ -254,12 +259,12 @@ class WavInspector:
         return json.dumps(result)
 
     def _send_classification_to_server(self, classification_data_json_string):
-        """Sends the classification to the receive_classification.php endpoint."""
-        url = "http://localhost/weevibesv2/api/receive_classification.php"
+        """Sends the classification to the /api/classifications endpoint."""
+        url = "http://localhost/weevibesv2/api/classifications" # RESTful URL
         headers = {'Content-Type': 'application/json'}
         try:
             classification_data = json.loads(classification_data_json_string)
-            response = requests.post(url, headers=headers, json={'classification': classification_data})
+            response = requests.post(url, headers=headers, json=classification_data) # Send the whole object
             response.raise_for_status()
             logging.info(f"Classification sent successfully: {classification_data_json_string} - Status Code: {response.status_code}")
             logging.info(f"Receiver response: {response.json()}")
@@ -301,4 +306,4 @@ def run(server_class=HTTPServer, handler_class=MyHandler, port=8000):
             wav_inspector_instance.stop_merge_thread()
 
 if __name__ == '__main__':
-    run(port=5000)  # Runs the server on port 5000
+    run(port=5000)  

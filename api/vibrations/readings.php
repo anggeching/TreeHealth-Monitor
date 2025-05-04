@@ -1,5 +1,5 @@
 <?php
-// api/reading_time.php
+// api/vibrations/readings.php (for GET requests to fetch vibration reading timestamps)
 
 require '../db/pdo_conn.php';
 require '../model/DataFetcher.php';
@@ -7,7 +7,7 @@ require '../model/DataFetcher.php';
 header('Content-Type: application/json');
 
 try {
-    $pdo = getPDOConnection('outcastp_weevibes');
+    $pdo = getPDOConnection('weevibes');
     $fetcher = new DataFetcher($pdo);
 
     $wavData = $fetcher->fetchAllWavDatesAndTime();
@@ -17,6 +17,7 @@ try {
         'data' => $wavData,
     ];
 
+    http_response_code(200); // OK
     echo json_encode($response);
 
 } catch (PDOException $e) {
