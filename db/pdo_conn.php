@@ -3,8 +3,8 @@
 
 function getPDOConnection($dbname = '') {
     $host = 'localhost';
-    $user = 'outcastp_testacc';
-    $pass = 'LN7#)el~-XZS';
+    $user = 'root';
+    $pass = '';
 
     try {
         $conn = new PDO(

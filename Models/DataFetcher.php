@@ -1,5 +1,10 @@
 <?php
 
+class User {
+    private $pdo
+    
+}
+
 class DataFetcher {
     private $pdo;
     private $logDirectory = '../logs/';
