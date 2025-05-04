@@ -53,11 +53,34 @@ Weevibes is a research prototype for an IoT-based system designed for the early 
             * `POST /api/users/login`:   Logs in an existing user.
             * `POST /api/users/logout`:  Logs out the current user.
 
-## API File Structure
+## File Structure
 
-The API is organized as follows:
+The Scripts are organized as follows:
 
-WeeVibesV2/├── api/│   ├── vibrations/│   │   ├── classifications.php (Handles POST for submitting classifications)│   │   ├── get_classifications.php (Handles GET for retrieving classifications)│   │   ├── readings.php (Handles GET for retrieving vibration reading times)│   │   ├── vibrations.php (Handles POST for uploading raw vibration data)│   ├── users/│   │   ├── users.php (Handles user registration, login, logout)│   │   ├── auth.php    (Optional:  Authentication middleware/utilities)│   ├── db/│   │   ├── pdo_conn.php (Database connection file)│   ├── model/│   │   ├── DataHandler.php (Handles data manipulation - INSERT)│   │   ├── DataFetcher.php (Handles data retrieval - SELECT)│   │   ├── User.php      (Optional: User model class)│   ├── logs/│   │   ├── vibrations_classification.log (Logs for classifications POST)│   │   ├── get_vibrations_classifications.log (Logs for classifications GET)│   │   ├── vibration_upload.log (Logs for vibration uploads)│   │   ├── vibration_readings.log│   │   ├── user_auth.log       (Logs for user authentication)│   ├── index.php (Optional: Could be used for API routing or documentation)├── db/ (Optional: If you keep database connection files outside api)│   ├── pdo_conn.php├── model/ (Optional: If you keep model files outside api)│   ├── DataHandler.php│   ├── DataFetcher.php│   ├── User.php      (Optional: User model class)├── logs/ (Optional: If you keep logs outside api)│   ├── ...├── ... (Other application files)
+TreeHealth-Monitor/
+├── api/
+│   ├── vibrations/
+│   │   ├── classifications.php                     Handles POST for submitting classifications
+│   │   ├── get_classifications.php                 Handles GET for retrieving classifications
+│   │   ├── readings.php                            Handles GET for retrieving vibration reading times
+│   │   ├── vibrations.php                          Handles POST for uploading raw vibration data
+│   ├── users/                                      Handles user registration, login, logout
+│   │   ├── login.php                               
+│   │   ├── logout.php
+│   │   ├── signup.php
+│   │   ├── status.php                         
+│   ├── logs/
+│   │   ├── vibrations_classification.log           Logs for classifications POST
+│   │   ├── vibration_upload.log                    Logs for vibration uploads  POST
+├── db/ (Optional: If you keep database connection files outside api)
+│   ├── pdo_conn.php                                Database connection file
+├── model/
+│   │   ├── DataHandler.php                         Handles data manipulation - INSERT
+│   │   ├── DataFetcher.php                         Handles data retrieval - SELECT
+│   │   ├── User.php                                User model class
+
+
+
 **Explanation of Key Directories and Files:**
 
 * `api/`: Contains all API endpoint files.
